@@ -1,0 +1,221 @@
+\documentclass[12pt]{article}
+ \usepackage[german]{babel}
+ \usepackage[utf8]{inputenc}
+ \usepackage{graphicx}
+ \author{Denis Herdt, Almin Causevic}
+ \title{ROS auf dem Rapberry Pi}
+ \setlength{\parindent}{0pt}                   % Einrueckung 1. Zeile eines Absatzes
+ \setlength{\parskip}{5pt plus 2pt minus 1pt}  % Abstand zwischen Absaetzen
+ \frenchspacing
+ \sloppy
+ 
+ 
+\begin{document}
+
+\begin{figure}[h]
+
+\includegraphics[width=4cm]{hs-logo.jpg}
+\end{figure}
+Fakultät für Elektrotechnik und Informatik
+
+\vspace{3cm}
+
+\begin{center}
+
+{\bf \huge ROS auf dem Raspberry Pi}
+\vspace{4cm}
+
+14 November, 2013
+\vspace{1cm}
+
+Systemadministration Projekt in Angewandter Informatik \\
+von Denis Herdt und Almin Causevic
+
+\end{center}
+
+\pagebreak
+
+\tableofcontents
+
+\pagebreak
+
+\section{Einleitung}
+1-2 Seiten
+\subsection{Motivation}
+
+Roboter Lab Anwendung von ROS und Möglichkeit, Roboter zu nutzen
+
+Interesse der Lab-Crew an Umsetzung ROS mit Raspberry Pi
+
+Kombination Hard-/Software
+
+Einarbeitung in Kommunikations Framework ROS
+
+Mit Hardware in Berührung zu kommen
+
+Konfiguration mit Linux
+
+Nodes nun mit Hardware (Pi) realisierbar
+
+\subsection{Zielstzung}
+
+Recherche über Linux Systeme auf Raspberry Pi
+Passendes Linux System auf Raspberry Pi aufsetzen					
+Recherche über ROS									
+geeigneten Roboter wählen (Recherche Verfügbarkeit, Komponenten etc.)	
+eventuell Komponenten beschaffen (Wlan Stick, etc.)				
+ROS auf Raspberry Pi aufsetzen		
+Wlan-Netzwerk zwischen 2 ROS-kompatiblen Systemen herstellen
+Netzwerk mithilfe von Testausgaben überprüfen \\
+
+{\bf optional}
+Roboter durch einen Raspberry Pi mithilfe von ROS steuern
+Bild einer Webcam durch ROS auf einen Bildschirm streamen
+
+\subsection{Eigene Leistung}
+
+anstatt Linux PC wird Pi benutzt
+
+\subsection{Aufbau der Arbeit}
+
+Recherche über Linux Systeme auf Raspberry Pi
+Passendes Linux System auf Raspberry Pi aufsetzen					
+Recherche über ROS									
+geeigneten Roboter wählen (Recherche Verfügbarkeit, Komponenten etc.)	
+eventuell Komponenten beschaffen (Wlan Stick, etc.)				
+ROS auf Raspberry Pi aufsetzen		
+Wlan-Netzwerk zwischen 2 ROS-kompatiblen Systemen herstellen
+Netzwerk mithilfe von Testausgaben überprüfen \\
+
+{\bf optional}
+Roboter durch einen Raspberry Pi mithilfe von ROS steuern
+Bild einer Webcam durch ROS auf einen Bildschirm streamen
+
+\section{Grundlagen}
+6-8 Seiten
+Hardware, die benutzt wird:
+
+Raspberry Pi (Akku, Wlan)
+Volksbot
+Smartphone
+Kabelz
+
+Software, die benützt wird:
+
+ROS (catkin)
+Linux-System
+Software Smartphone (App Steffen)
+
+\section{Problem}
+
+Hauptproblem??
+
+\subsection{Verwandte Arbeiten}
+
+Steffen, Marc
+ROS-Tut
+
+\section{Anforderungen}
+
+Datenpakete übers ROS Netzwerk verschicken kann
+Beliebige Datentypen
+Beliebige Linux-Systeme
+Überprüfung davon Log-Dateien, Kontrollausgaben etc..
+robuste und zuverlässige Kommunikation möglich
+modulares und flexibles Netzwerk
+Pakete (repos) sollen leicht in Projekte eingebunden werden
+
+optional:
+Roboter soll bei Steuerung in richtige Richtungen fahren
+Roboter soll sofort auf Richtungsanweisungen reagieren
+Robotersteuerung Sensibilität sollte einstellbar sein
+Steuerung über Wlan
+Raspberry Pi auf Roboter ohne Kabelzgewirr
+Node des Raspberry starte automatisch mit Raspbian
+Leichte Bedienbarkeit des Roboters
+
+optional:
+Streaming-Bild ruckelfrei bearbeitet werden
+soll unkonvertiert in Echtzeit übertragen werden
+soll an externem Bildschirm ausgegeben werden
+
+\section{Lösungsvorschläge}
+
+Netzwerk wird mit ROS-Master aufgesetzt, über topics und nodes
+verschicken und empfangen von Paketen 
+
+beliebige Datentypen durch msg und srv Funktion realisierbar
+
+ROS unterstüzt beliebige Linux Systeme..
+
+Horchen an Topics mit echo + Ausgabe im Code mithilfe ROS-Stream Fkt.
+
+Begrenzung der Anzahl der Datenübertragung
+Verschickte und erwartete Datentypen müssen stimmen
+Richtige Konfiguration des Masters und Clients
+
+durch ROS und catkin gegeben 
+
+durch catkin gegeben
+
+opt:
+abhängig vom richtigen Code der Motorsteuerung
+
+abhängig von Raspberry Pi Hardware und effizientem Code und
+guter Hardware
+
+abhängig vom Code
+
+Hardware nötig Wlan-Stick, Akku-Pack 
+
+sollte in Linux beim booten konfiguriert werden
+
+gegeben durch gute Smartphone App
+
+opt:
+abhängig von Raspberry Pi Hardware und Übertragungs-Codierung
+
+abhängig vom Codex Hardware Komponenten
+
+nötige Hardware und Netzwerk legen
+
+\section{Bewertung der Lösungen}
+
+alles gut
+
+\section{Implementation}
+
+ROS Netzwerk (topics, nodes, catkin...)
+Linux SD Karte Pi
+Datenübertragung an Volksbot
+Konfiguration Motorsteuerung-Paket und Compilieren
+Kontrollausgaben 
+Netzwerkkomponenten zusammen arbeiten lassen (Hard/-Software)
+Wlan -> Teilproblem
+Kamera -> Teilproblem Zeit
+
+
+\section{Fazit}
+1 Seite
+\subsection{Zusammenfassung}
+
+sehr knapper Zeitrahmen
+hohe Anforderungen für diesen Zeitraum
+interessantes Projekt
+anspruchsvolles Projekt
+viel über Linux und Ros und Hardware und Netzwerken gelernt
+Spaß
+
+\section{Ausblick}
+
+Benutzung des Pi's als Hardware Nodes Lab
+Benutzung des Pi's für kleine Roboterprojekte Lab
+Immer mehr binary packages für ROS Pi verfügbar -> mehr Möglichkeiten
+z.B.: GPIO Interface -> Knöpfe Kaffemaschine, Relays, alle möglichen Signale
+auf Hardwareebene
+
+\section{Eigene Leistung}
+
+anstatt Linux PC wird Pi benutzt
+
+\end{document}
