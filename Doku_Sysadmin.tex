@@ -11,7 +11,7 @@
  
  
 \begin{document}
-
+%4-20 Seiten
 \begin{figure}[h]
 
 \includegraphics[width=4cm]{hs-logo.jpg}
@@ -99,19 +99,71 @@ Roboter durch einen Raspberry Pi mithilfe von ROS steuern
 Bild einer Webcam durch ROS auf einen Bildschirm streamen
 
 \section{Grundlagen}
-6-8 Seiten
-Hardware, die benutzt wird:
+%6-8 Seiten
 
-Raspberry Pi (Akku, Wlan)
-Volksbot
-Smartphone
-Kabelz
+\subsection{Raspberry Pi Hardwarekomponenten}
 
-Software, die benützt wird:
+Der Raspberry Pi ist ein kreditkartengroßer Einplatinencomputer, der von der Raspberry Pi Foundation entwickelt wurde.
+Wir benutzen für dieses Projekt das leistungsstärkere Modell B.
 
-ROS (catkin)
-Linux-System
-Software Smartphone (App Steffen)
+Technische Details:
+
+\begin{itemize}
+\item Preis: ca. 35 Euro
+\item Prozessor: ARM1176JZF-S (700 MHz)
+\item Broadcom VideoCore IV
+\item SDRAM: 512 MB
+\item Bis zu 16 GPIO-Pins
+\item USB-Anschlüsse: 2
+\item FBAS, HDMI
+\item 3,5-mm-Klinkenstecker (analog), HDMI (digital)
+\item Kartenleser für SD (SDHC und SDXC)/MMC/SDIO
+\item 10/100-MBit-Ethernet-Controller 
+\item 5 V, 700 mA (3,5 Watt)
+\item 5-V-Micro-USB-Anschluss (Micro-B), alternativ 4 x AA-Batterien
+\end{itemize}
+
+Für den Anschluss an einen Bildschirm benutzen den HDMI Ausgang.
+Ein 17-Zoll Monitor wird für die Bildschirmausgabe des Raspberry über HDMI zu DVI benutzt.
+
+Als Ladegerät steht ein Akkupack ......(Firma,Modell) zum Einsatz. 
+Hierbei ist wichtig, dass der Raspberry mind. 700 mA, besser 1 A zur Stromversorgung bekommt. 
+Bei niedrigerer Amperzahl arbeitet der PC oft nicht zuverlässig.
+
+Ein schneller und großer RAM Speicher ist für unsere Zwecke wichtig, da viele Signale, teils sogar synchron, verarbeitet werden müssen.
+
+Für die Datenübertragung über das Netz benutzen wir einen Standard 300Mbit/s Wlan-Stick.
+
+Wir benutzen das auf Linux basierende Betriebssystem Raspbian.
+Es handelt sich um ein für Raspberry Pi optimiertes open-source Debian-System.
+Es enthält viele für die ARM-Architektur vorkompilierte Pakete (über 35.000), dazu auch Features wie etwa eine GUI.
+Das System braucht 3GB Speicherbedarf unserer 16GB großen SD-Karte.
+
+Der zusätzliche Speicherplatz wäre nötig, falls man vorhat, Log-Dateien und Ähnliches direkt auf dem Raspberry Pi speichern. 
+Doch in unserem Fall übernehmen das die leistungsstärkeren PC's über das ROS Netzwerk.
+
+
+%%%%%
+%GPIO-Pins
+%%%%%
+
+
+%%%%%
+% ARM-Architektur 
+% x_86 Architektur
+% Unterschiede
+%%%%%
+
+
+\subsection{Smartphone}
+%App-Steffen
+
+\subsection{Volksbot}
+
+\subsection{ROS}
+%catkin, Netwerk
+
+
 
 \section{Problem}
 
@@ -130,7 +182,7 @@ Beliebige Linux-Systeme
 Überprüfung davon Log-Dateien, Kontrollausgaben etc..
 robuste und zuverlässige Kommunikation möglich
 modulares und flexibles Netzwerk
-Pakete (repos) sollen leicht in Projekte eingebunden werden
+Pakete(repos) sollen leicht in Projekte eingebunden werden
 
 optional:
 Roboter soll bei Steuerung in richtige Richtungen fahren
@@ -224,5 +276,13 @@ auf Hardwareebene
 \section{Eigene Leistung}
 
 anstatt Linux PC wird Pi benutzt
+
+\section{Quellen}
+\begin{verbatim}
+
+http://de.wikipedia.org/wiki/Raspberry_Pi
+http://www.amazon.de/Raspberry-Pi-RBCA000-Mainboard-1176JZF-S/dp/B008PT4GGC
+http://www.raspbian.org/
+\end{verbatim}
 
 \end{document}
