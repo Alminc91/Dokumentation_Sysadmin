@@ -64,7 +64,7 @@ Passendes Linux System auf Raspberry Pi aufsetzen
 Recherche über ROS									
 geeigneten Roboter wählen (Recherche Verfügbarkeit, Komponenten etc.)	
 eventuell Komponenten beschaffen (Wlan Stick, etc.)				
-ROS auf Raspberry Pi aufsetzen		
+ROS auf Raspberry Pi aufsetzen
 Wlan-Netzwerk zwischen 2 ROS-kompatiblen Systemen herstellen
 Netzwerk mithilfe von Testausgaben überprüfen \\
 
@@ -135,12 +135,19 @@ Das System braucht 3GB Speicherbedarf unserer 16GB großen SD-Karte.
 Der zusätzliche Speicherplatz wäre nötig, falls man vorhat, Log-Dateien und Ähnliches direkt auf dem Raspberry Pi speichern. 
 Doch in unserem Fall übernehmen das die leistungsstärkeren PC's über das ROS Netzwerk.
 
-
+General Purpose Input/Output
+3,3V Signale
+direkter Anschluss an TTL Level kann zur Zerstörung führen! (5 Volt)
+können direkt über die Files im Ordner '/sys/class/gpio/' angesteuert werden
 %%%%%
 %GPIO-Pins
 %%%%%
 
-
+32-Bit-Chip-Design
+Aufgrund ihrer geringen Leistungsaufnahme kommen ARM-Prozessoren vor allem in eingebetteten Systemen, wie Mobiltelefonen, PDAs und Routern zum Einsatz.
+Besondere Bedeutung hat die Architektur bei Smartphones
+Zukunft: ARMv8 64-Bit 2014, iPhone 5s soll darauf basierenden Chip benutzen.
+Unsere PC's basieren auf einer x64 (64Bit) oder x84 (32Bit) Architektur.
 %%%%%
 % ARM-Architektur 
 % x_86 Architektur
@@ -276,6 +283,10 @@ anstatt Linux PC wird Pi benutzt
 http://de.wikipedia.org/wiki/Raspberry_Pi
 http://www.amazon.de/Raspberry-Pi-RBCA000-Mainboard-1176JZF-S/dp/B008PT4GGC
 http://www.raspbian.org/
+http://www.softwareok.de/?seite=faq-System-Allgemein&faq=13
+http://de.wikipedia.org/wiki/ARM-Architektur
+http://www.rn-wissen.de/index.php/Raspberry_PI:_GPIO
+
 \end{verbatim}
 
 \end{document}
