@@ -43,11 +43,20 @@ von Denis Herdt und Almin Causevic
 1-2 Seiten
 \subsection{Motivation}
 
-
-Wir haben uns für dieses Thema entschieden, weil wir etwas in Kombination mit Hard- und Software machen wollten. Da wir außerdem Zugang zum Robotiklabor der Hochschule Weingarten haben, und mitbekommen, wie umständlich die Roboter mit einem zusätzlichen Laptop gesteuert werden, haben wir uns entschlossen, dieses Problem mithilfe des Raspberry Pi zu lösen. Die Idee stieß auch auf viel Interesse bei den anderen Laborkollegen.
+%coole Roboter im Labor für dieses Projekt
+Wir haben uns für dieses Thema entschieden, weil wir etwas in Kombination mit Hard- und Software machen wollten. Da wir außerdem Zugang zum Robotiklabor der Hochschule
+%Zugang besitzt jeder Student
+Weingarten haben, und mitbekommen, wie umständlich 
+%nur kleine Roboter oder in diesem Fall Volksbot
+die Roboter mit einem zusätzlichen Laptop gesteuert werden, haben wir uns entschlossen, dieses Problem mithilfe des Raspberry Pi zu lösen. Die Idee stieß auch auf viel Interesse bei den anderen Laborkollegen.
 Unser Ziel möchten wir mithilfe des Betriebssystems ROS (Robot Operating System) realisieren.
+%nötig?
 Durch die Kombination mit der Mächtigkeit und Flexibilität von ROS und der geringen Größe und dem niedrigen Energieverbrauch des Pi eröffnen sich außerdem neue und effizientere Einsatzmöglichkeiten.
-Außerdem wollten wir uns näher mit der Arbeitsweise von ROS vertraut machen und mehr mit Hardware in Berührung kommen. Dieses Projekt setzt auch viel Linuxkonfiguration voraus.
+%dieser Absatz oben drüber?
+%weltweit benutzt, USA München, für weiteren Lebensweg nützlich eventuell
+Außerdem wollten wir uns näher mit der Arbeitsweise von ROS vertraut machen und mehr mit Hardware in Berührung kommen. 
+%Warum für uns motivierend?
+Dieses Projekt setzt auch viel Linuxkonfiguration voraus.
 
 
 %Roboter Lab Anwendung von ROS und Möglichkeit, Roboter zu nutzen
@@ -124,13 +133,13 @@ Technische Details:
 \end{itemize}
 
 Für den Anschluss an einen Bildschirm benutzen den HDMI Ausgang.
-Ein 17-Zoll Monitor wird für die Bildschirmausgabe des Raspberry über HDMI zu DVI benutzt.
+Diesen benutzen wir für Kontrollausgaben und Tests.
 
-Als Ladegerät steht ein Akkupack ......(Firma,Modell) zum Einsatz. 
+Als Stromquelle steht ein Akkupack ......(Firma,Modell) zum Einsatz. 
 Hierbei ist wichtig, dass der Raspberry mind. 700 mA, besser 1 A zur Stromversorgung bekommt. 
 Bei niedrigerer Amperzahl arbeitet der PC oft nicht zuverlässig.
 
-Ein schneller und großer RAM Speicher ist für unsere Zwecke wichtig, da viele Signale, teils sogar synchron, verarbeitet werden müssen.
+Ein schneller und großer RAM Speicher ist für unsere Zwecke wichtig, da viele Signale, teils sogar synchron, verarbEin 17-Zoll Monitor wird für die Bildschirmausgabe des Raspberry über HDMI zu DVI benutzteitet werden müssen.
 
 Für die Datenübertragung über das Netz benutzen wir einen Standard 300Mbit/s Wlan-Stick.
 
@@ -149,6 +158,8 @@ können direkt über die Files im Ordner '/sys/class/gpio/' angesteuert werden
 %%%%%
 %GPIO-Pins
 %%%%%
+
+%Wlan Übertragung für Raspberry über Stick sehr leistungsfressend !
 
 32-Bit-Chip-Design
 Aufgrund ihrer geringen Leistungsaufnahme kommen ARM-Prozessoren vor allem in eingebetteten Systemen, wie Mobiltelefonen, PDAs und Routern zum Einsatz.
