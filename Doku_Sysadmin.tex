@@ -137,9 +137,9 @@ auf die Ablösung eines Laptops durch den kleineren und leichteren Raspberry Pi 
 
 Der Raspberry Pi ist ein kreditkartengroßer Einplatinencomputer, der von der Raspberry Pi Foundation entwickelt wurde.
 Wir benutzen für dieses Projekt das leistungsstärkere Modell B.
-
+%Zitate für die techn. Details?
+\parbox{8cm}{
 Technische Details:
-
 \begin{itemize}
 \item Preis: ca. 35 Euro
 \item Prozessor: ARM1176JZF-S (700 MHz)
@@ -148,12 +148,21 @@ Technische Details:
 \item Bis zu 16 GPIO-Pins
 \item USB-Anschlüsse: 2
 \item FBAS, HDMI
+\end{itemize}
+}
+\hfill
+\parbox{5cm}{
+\includegraphics[width=5cm]{Raspi.jpg}
+}
+\begin{itemize}
 \item 3,5-mm-Klinkenstecker (analog), HDMI (digital)
 \item Kartenleser für SD (SDHC und SDXC)/MMC/SDIO
 \item 10/100-MBit-Ethernet-Controller 
 \item 5 V, 700 mA (3,5 Watt)
 \item 5-V-Micro-USB-Anschluss (Micro-B), alternativ 4 x AA-Batterien
 \end{itemize}
+
+Für Test und Kontrollausgaben benutzen wir einen am HDMI-Ausgang angeschlossenen Monitor.
 
 Für den Anschluss an einen Bildschirm benutzen den HDMI Ausgang.
 Diesen benutzen wir für Kontrollausgaben und Tests.
@@ -188,14 +197,72 @@ Wir konnten uns leider jedoch zeitlich bedingt nicht mehr mit dieser Thematik be
 
 
 \subsection{Smartphone}
-%App-Steffen
+
+Es wird ein aud Android basierendes Smartphone verwendet.
+Wir benutzen auf dem Smartphone eine in einer Projekt-Arbeit entstandene App.
+Sie bindet sich an einen ROS-Master (später näher erläutert) und übergibt die X und -Y Koordinaten relativ zu sich weiter.
+Diese Werte können für die Steuerung des Motors verwendet werden, indem jeweils ein Wert an eine Radachse geliefert wird. Dieser Wert bildet die Geschwindigkeit des Rades ab.
+Zur erleichterten Bedienung stellt uns die App eine GUI zur Verfügung. 
 
 \subsection{Volksbot}
 
+VolksBot ist ein Roboterbaukastensystem.
+Mit Hilfe des Baukastens können sehr schnell und preiswert unterschiedlichste Varianten mobiler Roboter hergestellt werden.
+Der Volksbot wurde an der Hochschule Weingarten für den RoboCup verwendet.
+%Wir brauchen hier mehr Infos, wo wurde er verwendet, Besonderheiten
+%Bild
 \subsection{ROS}
-%catkin, Netwerk
+%Zitate??
+ROS ist kein eigentliches Betriebssystem im herkömmlichem Sinne, sondern eine Art strukturierte Kommunikationsschicht.
+Die Ziele von ROS können zusammengefasst werden zu:
+\begin{itemize}
+\item Peer-to-peer (System mit vielen laufenden Prozessen auf verschiedenen Hosts)
+\item Tool-based (microkernel Design bestehend aus vielen Komponenten, ähnlich zu Linux)
+\item multi-lingual (unterstützt viele Computersprachen, z. B. Python, C++, etc.)
+\item thin (Wiederverwendbarkeit von Code steht im Mittelpunkt)
+\item open source and free (unter der BSD Lizenz)
+\end{itemize}
+Es ist das einzig existierende Framework, welches sich auf diese Kriterien spezialisiert.
+Den Entwicklern von ROS ging es vor allem um die Vereinfachung, Software für die hohe Zahl an verschiedenen Roboter zu schreiben.
+%Zitat
+ROS stellt dazu Bibliotheken und Werkzeuge, Hardware Abstraktion, Gerätetreiber, Bibliotheken, Visualisierungen, Nachrichtenvermittlung, Packetverwaltung und andere Komponenten zur Verfügung.
 
+Im Nachfolgenden werden die wichtigsten ROS Core Komponenten kurz beschrieben.
 
+{\bf Topic} Topics können als "named bus" gesehen werden, über welche Nodes Messages verteilen können. Es ähnelt dem Multicasting Prinzip. An Topics kann subscribed (zugehört) oder published (geredet) werden.
+
+{\bf Node} Eine Node ist ein simples Programm, welches jede Funktionalität ermöglicht.  Sie kommunizieren direkt über oben genannte Topics.
+
+{\bf Roscore} Der Roscore kann als Rückgrat des ROS Systems beschrieben werden. Es verwaltet die Registrierung der Nodes und Funktionen in einer Art lookup service für andere Nodes. Es bietet zusätzlich einen Parameter Server, in welchem im Laufenden Betrieb Variablen und Paramater gespeichert werden können und mit welchen gearbeitet werden kann.
+
+{\bf Message} Eine Message kann als Sprache angesehen werden, in welcher Nodes kommunizieren. Es ist eine Struktur aus simplen Parametern.
+Beispiel:
+\begin{verbatim}
+	# This represents a vector in free space. 
+	float64 x
+	float64 y
+	float64 z
+\end{verbatim}
+Eigene Messages mit den uns bekannten Standardtypen wie int, bool, etc können leicht definiert werden.
+
+{\bf Package} Software in ROS wird mithilfe von Packages verwaltet.
+Sie enthalten Nodes, datasets, configuration files, etc.
+
+{\bf Manifest} Sie enthält Meta Informationen über ein ROS Package, wie beispielsweise Abhängigkeiten oder Lizenzinformationen.
+
+{\bf Launchfile} Ein Launchfile ist eine simple XML Datei, welche Informationen über die zu Beginn zu startenden Nodes mit entsprechenden Parametern enthält.
+Dies bietet eine komfortablere Alternative, als jedes Node einzeln zu starten.
+%Beispiel??
+ 
+{\bf catkin} Catkin ist das seit Groovy in ROS verwendete Workspace-Verwaltungssystem.
+Es ist in 4 Spaces unterteilt:
+\begin{itemize}
+\item Source Space
+\item Build Space
+\item Devel Space
+\item Install Space
+\end{itemize}
+Catkin bietet uns eine komfortable Möglichkeit über cmake, ROS Packages zu compilieren, Tests an Ihnen durchzuführen und sie schließlich zu installieren.
 
 \section{Problem}
 
