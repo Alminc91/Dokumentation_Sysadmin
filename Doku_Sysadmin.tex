@@ -137,18 +137,25 @@ Ein schneller und großer RAM Speicher ist für unsere Zwecke wichtig, da viele 
 
 Für die Datenübertragung über das Netz benutzen wir einen Standard 300Mbit/s Wlan-Stick.
 
+Der Raspberry Pi arbeitet mit einer ARM-Prozessorarchitektur.
+Diese Architektur wird gerne für embedded Systems, wie PDAs oder Router, eingesetzt.
+
+Sie ist auch auf jedem Smartphone zu finden, da sie den Vorteil einer sehr geringen Leistungsaufnahme bietet. 
+
+Erwähnenswert ist die Architektur deshalb, weil wir im Laufe des Projektes Schwierigkeiten hatten, auf die wir später eingehen werden
 Wir benutzen das auf Linux basierende Betriebssystem Raspbian.
-Es handelt sich um ein für Raspberry Pi optimiertes open-source Debian-System.
+Dabei handelt sich um ein für Raspberry Pi optimiertes open-source Debian-System.
 Es enthält viele für die ARM-Architektur vorkompilierte Pakete (über 35.000), dazu auch Features wie etwa eine GUI.
+
 Das System braucht 3GB Speicherbedarf unserer 16GB großen SD-Karte.
+Der zusätzliche Speicherplatz wäre nötig, falls man vorhat, Log-Dateien und Ähnliches direkt auf dem Raspberry Pi zu speichern. 
+In unserem Fall übernehmen das jedoch die leistungsstärkeren PC's über das ROS Netzwerk.
 
-Der zusätzliche Speicherplatz wäre nötig, falls man vorhat, Log-Dateien und Ähnliches direkt auf dem Raspberry Pi speichern. 
-Doch in unserem Fall übernehmen das die leistungsstärkeren PC's über das ROS Netzwerk.
+GPIO (General Purpose Input/Output) ist ein weiteres interessantes Feature des Raspberry Pi.
+Es gibt uns die Möglichkeit, jegliche Hardware-Funktionalität anzusteuern.
+Beispielsweise können LED-Leuchten oder der Start-Knopf der Kaffeemaschine damit über ROS gesteuert werden.
+Wir konnten uns leider jedoch zeitlich bedingt nicht mehr mit dieser Thematik beschäftigen, es bietet aber Anreiz für noch mehr Ansätze und Umsetzungen mithilfe des Raspberry Pi und ROS.
 
-General Purpose Input/Output
-3,3V Signale
-direkter Anschluss an TTL Level kann zur Zerstörung führen! (5 Volt)
-können direkt über die Files im Ordner '/sys/class/gpio/' angesteuert werden
 %%%%%
 %GPIO-Pins
 %%%%%
