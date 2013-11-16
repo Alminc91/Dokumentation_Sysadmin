@@ -226,7 +226,7 @@ optional:
 \item Sensibilität der Steuerung sollte einstellbar sein
 \item Steuerung über WLAN
 \item Raspberry Pi auf Roboter ohne Kabelzgewirr %haben wir mit WLAN nicht
-\item Node des Raspberry beim Hochfahren automatisch starte
+\item ROS-Core des Raspberry beim Hochfahren automatisch starte
 \item Leichte Bedienbarkeit des Roboters
 
 \vspace{0,6cm}
@@ -240,52 +240,27 @@ optional:
 \section{Lösungsvorschläge}
 
 
-Es wird ein ROS-Master aufgesetzt. Dieser sorgt für ein bestehendes ROS-Netzwerk und ist für die Komponentensynchronisation und Paketverwaltung zuständig.
-Über Topics und Nodes werden Datenpakete verschickt und empfangen.
-%TODO wiki nachschauen obs stimmt
+Es wird ein ROS-Master aufgesetzt. Dieser gilt als Knotenpunkt (vergleichbar mit einem Defaultgateway) und sorgt für die Kommunikationsmöglichkeit im ROS-Netzwerk.
 
 Die Verarbeitung von verschiedenen Datentypen ist durch msg und srv realisierbar
 %TODO msg/srv näher erklären
-
-Die Unterstützung beliebiger Linuxsysteme wird von ROS grundsätzlich unterstützt.
-%TODO umschreiben
 
 Kontrollausgaben und ähnliches werden durch Horchen an Topics mithilfe von echo und durch Ausgabenbereiche im Quellcode durch das Netzwerk realisiert.
  
 %Horchen an Topics mit echo + Ausgabe im Code mithilfe ROS-Stream Fkt.
 
-Die Netzwerkstabilität und -zuverläsigkeit könnte durch Begrenzung der zeitgleichen Datenübertragung umgesetzt werden. Zusätzlich kann man eine Überprüfung der verschickten und erwarteten Daten einbinden.
-
+Die Netzwerkstabilität und -zuverläsigkeit könnte durch Begrenzung der zeitgleichen Datenübertragung umgesetzt werden. Zusätzlich kann man eine Überprüfung der verschickten und erwarteten Datentypen einbinden.
 
 %Verschickte und erwartete Datentypen müssen stimmen
 %Richtige Konfiguration des Masters und Clients
-Ein Modulares und flexibles Netzwerk, sowie das einfache Einbinden von Repositories ist gernerell durch ROS in kombination mit Catkin gegeben.
 
+Ein Modulares und flexibles Netzwerk, sowie das einfache Einbinden von Repositories ist durch ROS in Kombination mit Catkin gegeben. Die Unterstützung beliebiger Linuxsysteme erfolgt ebenfalls durch ROS. Diese Features müssen allerding zuvor eingebunden werden.
+%TODO umschreiben!
 
 %durch ROS und catkin gegeben 
 %durch catkin gegeben
 
-
-\begin{itemize}
-\item Roboter soll bei Steuerung in richtige Richtungen fahren
-\item Roboter soll sofort auf Richtungsanweisungen reagieren
-\item Sensibilität der Steuerung sollte einstellbar sein
-\item Steuerung über WLAN
-\item Raspberry Pi auf Roboter ohne Kabelzgewirr %haben wir mit WLAN nicht
-\item Node des Raspberry beim Hochfahren automatisch starte
-\item Leichte Bedienbarkeit des Roboters
-
-\vspace{0,6cm}
-
-\item Streaming-Bild ruckelfrei verarbeiten
-\item unkonvertiert Echtzeitübertragung
-\item Ausgabe am externem Bildschirm
-\end{itemize}
-
-
-opt:
-
-%Die Steuerung des Roboters hängt vom fehlerfreien und sauberen Steuerungscode ab. Falls nötig, müsste man Veränderungen am bestehenden Code durchführen.
+optional:
 
 Die Reaktionszeit 
 und Steuerung %hinzugefügt, weil oberer abschnitt auskommentiert
@@ -295,44 +270,72 @@ wird durch zuverlässige und leistungstarke Hardware, sowie durch einen effizien
 %abhängig von Raspberry Pi Hardware und effizientem Code und
 %guter Hardware
 
-Der Bootvorgang des Raspbian soll so konfiguriert werden,   %TODO
+Um bequem mit dem Raspberry arbeiten zu können, ohne jedes mal den ROS-Core starten zu müssen, muss dieser in den Bootvorgang des Raspbian eingebunden werden.
+
 %sollte in Linux beim booten konfiguriert werden
 
-gegeben durch gute Smartphone App
+%gegeben durch gute Smartphone App
 
-opt:
-abhängig von Raspberry Pi Hardware und Übertragungs-Codierung
+%\item Streaming-Bild ruckelfrei verarbeiten
+%\item unkonvertiert Echtzeitübertragung
+%\item Ausgabe am externem Bildschirm
 
-abhängig vom Codex Hardware Komponenten
+vspace{0,6cm}
 
-nötige Hardware und Netzwerk legen
+Ein sauberes und störungsfreies Übertragungsbild hängt hauptsächlich von der Hardware des Raspberry Pi, aber auch von der Codierung ab. Der Stream soll durch  Umleiten des Bildes über das Netzwerk an einen PC-Monitor realisiert werden. Falls dabei Probleme auftreten sollten, können wir versuchen die Codierung zu bearbeiten oder leistungsverstärkende Hardware an den Pi anschließen.
+
+%abhängig von Raspberry Pi Hardware und Übertragungs-Codierung
+
+%abhängig vom Codex Hardware Komponenten
+
+%nötige Hardware und Netzwerk legen
 
 \section{Bewertung der Lösungen}
 
-alles gut
+Bis jetzt sind unsere Lösungsansätze realativ erfolgreich gewesen. Es könnten jedoch Probleme bei der Steuerung des Roboters über das WLAN-Netzwerk entstehen. Der Grund dafür ist die zusätzliche Datenmenge, die verarbeitet werden muss. 
 
 \section{Implementation}
 
 ROS Netzwerk (topics, nodes, catkin...)
+
+
 Linux SD Karte Pi
-Datenübertragung an Volksbot
+
+
+Datenübertragung an Volksbot mithilfe eines USB zu VGA Adapters. Dieser wird per USB an den Raspberry Pi und per VGA an das Steuerungsmodul des Roboters angeschlossen.
+
+
 Konfiguration Motorsteuerung-Paket und Compilieren
-Kontrollausgaben 
+
+
+Kontrollausgaben:
+\begin{itemize}
+
+\item Horchen am ROS-Topic
+
+\subitem rostopic echo ''Topicbezeichnung''
+
+\item 
+
+\end{itemize}
+
 Netzwerkkomponenten zusammen arbeiten lassen (Hard/-Software)
+
+
 Wlan -> Teilproblem
-Kamera -> Teilproblem Zeit
+
+
+%Kamera -> Teilproblem Zeit
 
 
 \section{Fazit}
 1 Seite
 \subsection{Zusammenfassung}
 
-sehr knapper Zeitrahmen
-hohe Anforderungen für diesen Zeitraum
-interessantes Projekt
-anspruchsvolles Projekt
-viel über Linux und Ros und Hardware und Netzwerken gelernt
-Spaß
+hohe Anforderungen für knappen Zeitraum
+interessantes, anspruchsvolles Projekt
+viel über Linux und Ros gelernt
+Hardware- und Netzwerkkonfiguration interessant
 
 \section{Ausblick}
 
@@ -344,7 +347,7 @@ auf Hardwareebene
 
 \section{Eigene Leistung}
 
-anstatt Linux PC wird Pi benutzt
+Durch unser Projekt wird der Laptop am ''Volksbot'' durch einen viel kleineren und leichteren Raspberry Pi ersetzt. Da wir mit ROS arbeiten, kann der Pi mit nur wenig Aufwand auch an anderen Robotern eingesetzt werden.
 
 \section{Quellen}
 \begin{verbatim}
