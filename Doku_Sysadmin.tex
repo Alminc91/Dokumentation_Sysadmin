@@ -43,7 +43,9 @@ von Denis Herdt und Almin Causevic
 1-2 Seiten
 \subsection{Motivation}
 
-Wir haben uns für dieses Thema entschieden, weil wir in Kombination mit Hard- und Software arbeiten wollten. Wir haben mitbekommen, wie umständlich z.B. der Roboter ''Volksbot'' im Robotiklabor der Hochschule mit einem zusätzlichen, auf dem Roboter platzierten Laptop gesteuert werden muss, der unnötig Platz und Gewicht beansprucht. Deshalb haben wir uns entschlossen, dieses Problem mithilfe des kleinen und leichten Raspberry Pi zu lösen.
+Wir haben uns für dieses Thema entschieden, weil wir mit Hard- und Software arbeiten wollten. 
+
+Wir haben mitbekommen, wie umständlich z.B. der Roboter ''Volksbot'' im Robotiklabor der Hochschule mit einem zusätzlichen, auf dem Roboter platzierten Laptop gesteuert werden muss, der unnötig Platz und Gewicht beansprucht. Deshalb haben wir uns entschlossen, dieses Problem mithilfe des kleinen und leichten Raspberry Pi zu lösen.
 Die Idee stieß auch auf großes Interesse bei den Labormitarbeitern und bringt viel praktischen Nutzen.
 
 Unser Ziel möchten wir mithilfe des Software-Frameworks ROS (Robot Operating System) realisieren.
@@ -51,11 +53,7 @@ Für ROS haben wir uns entschieden, weil es zur Zeit die aktuellste und inovativ
 
 Durch die Kombination mit der Mächtigkeit und Flexibilität von ROS und der geringen Größe und dem niedrigen Energieverbrauch des Pi eröffnen sich außerdem neue und effizientere Einsatzmöglichkeiten.
 
-Sehr gut finden wir auch die Tatsache, dass wir mit Linux arbeiten können und dieses
-%Konfiguration von Linux???
-Projekt viel Konfiguration des Betriebssystems voraussetzt, da wir auch gerne mehr
-%du meinst Praxiserfahrung??
-Praxisanwendung mit Linux haben möchten.
+Sehr gut finden wir auch die Tatsache, dass wir mit Linux arbeiten können und dieses Projekt viel Konfiguration des Betriebssystems voraussetzt, da wir auch gerne mehr Praxiserfahrung mit Linux haben möchten.
 
 %Roboter Lab Anwendung von ROS und Möglichkeit, Roboter zu nutzen
 
@@ -71,27 +69,28 @@ Praxisanwendung mit Linux haben möchten.
 
 %Nodes nun mit Hardware (Pi) realisierbar
 
-\subsection{Zielstzung}
+\subsection{Zielsetzung}
 
 
 Unser Hauptziel besteht darin, ROS auf dem Raspberry Pi aufzusetzen und zu nutzen. Dieses Ziel wird wie folgt unterteilt:\\
 
-Zunächst möchten wir ein passendes, auf Linux basiertes Betriebssystem auswählen und auf dem Raspberry Pi aufsetzen. In diesem Fall haben wir uns für Raspbian entschieden, da es außerdem am kopatibelsten zu ROS ist.
+Zunächst möchten wir ein passendes, auf Linux basierendes Betriebssystem auswählen und auf dem Raspberry Pi aufsetzen. In diesem Fall haben wir uns für Raspbian entschieden, da es zusätzlich am kopatibelsten zu ROS ist.
 
 Als nächstes wählen wir einen geeigneten Roboter aus. Die Kriterien dafür erarbeiten wir uns aus einer vorangegangenen ROS-Recherche.
 
 Im Anschluss setzen wir ROS auf dem Raspberry Pi und mehreren Linux-Rechnern auf und stellen ein WLAN-Netzwerk zwischen den verschiedenen ROS-Komponenten her.
 Dieses Netzwerk wird mithilfe von Testausgaben überprüft.
 
-Damit ist die Grundlage zum Anwenden von ROS auf dem Pi geschaffen, an die man weiter Projekte knüpfen kann.\\
+Damit ist eine Grundlage für weitere Anwendungen für ROS auf dem Raspberry geschaffen.\\
 
 {\bf optional}\\
 
-Bleibt am Ende noch genug Zeit, implementieren wir die Steuerung des ''Volksbots'' auf dem Raspberry. Zur Usabilitysteigerung integrieren wir ein Smartphone ins ROS-Netzwerk. Die Bewegungsrichtung und -geschwindigkeit des Roboters soll durch das Schwenken des Smartphones bestimmt werden.
+Bleibt am Ende noch genug Zeit, kompilieren wir ein Steuerungspaket für den ''Volksbots'' auf dem Raspberry. Zur Verbesserung der Usability integrieren wir ein Smartphone ins ROS-Netzwerk. Die Bewegungsrichtung und -geschwindigkeit des Roboters soll durch das Schwenken des Smartphones bestimmt werden.
 
 Haben wir damit Erfolg und wiederum genügend Zeit zur Verfügung, sprechen wir die integrierte Kamera des Roboters an und streamen das Bild mithilfe des Netzwerkes auf einen externen Bildschirm.
 
-Mit diesen Optionen wollen wir zeigen, wie Flexibel und Umfangreich ROS in der Anwendung sein kann.
+Da zukünftige Roboter Ihre Umgebung erkennen und sich sicher im Raum bewegen 
+sollen, sehen wir diese Tests als nützlich an.
 
 %Roboter durch einen Raspberry Pi mithilfe von ROS steuern
 %Bild einer Webcam durch ROS auf einen Bildschirm streamen
@@ -100,10 +99,7 @@ Mit diesen Optionen wollen wir zeigen, wie Flexibel und Umfangreich ROS in der A
 
 Das ''neue'' an diesem Projekt bezieht sich
 %Unsere Leistung bezieht sich
-auf die Ablösung eines Laptops durch den kleineren und leichteren Raspberry Pi als ROS-Komponente am ausgewählten Roboter, sowie einem Leistungs- bzw. Eignungstest des Raspberry 
-im Aufgabenbereich Robotersteuerung.
-% als Steuerungseinheit des "Volksbot".
-
+auf die Ablösung eines Laptops durch den kleineren und leichteren Raspberry Pi als ROS-Komponente am ausgewählten Roboter. Desweiteren möchten wir herausfinden, ob die Leistung des Pi für diese Aufgabe ausreicht.
 
 %anstatt Linux PC wird Pi benutzt
 
@@ -142,8 +138,8 @@ im Aufgabenbereich Robotersteuerung.
 Der Raspberry Pi ist ein kreditkartengroßer Einplatinencomputer, der von der Raspberry Pi Foundation entwickelt wurde.
 Wir benutzen für dieses Projekt das leistungsstärkere Modell B.
 
-\parbox{8cm}{
 Technische Details:
+
 \begin{itemize}
 \item Preis: ca. 35 Euro
 \item Prozessor: ARM1176JZF-S (700 MHz)
@@ -152,13 +148,6 @@ Technische Details:
 \item Bis zu 16 GPIO-Pins
 \item USB-Anschlüsse: 2
 \item FBAS, HDMI
-\end{itemize}
-}
-\hfill
-\parbox{5cm}{
-\includegraphics[width=5cm]{Raspi.jpg}
-}
-\begin{itemize}
 \item 3,5-mm-Klinkenstecker (analog), HDMI (digital)
 \item Kartenleser für SD (SDHC und SDXC)/MMC/SDIO
 \item 10/100-MBit-Ethernet-Controller 
@@ -166,13 +155,14 @@ Technische Details:
 \item 5-V-Micro-USB-Anschluss (Micro-B), alternativ 4 x AA-Batterien
 \end{itemize}
 
-Für Test und Kontrollausgaben benutzen wir einen am HDMI-Ausgang angeschlossenen Monitor.
+Für den Anschluss an einen Bildschirm benutzen den HDMI Ausgang.
+Diesen benutzen wir für Kontrollausgaben und Tests.
 
-Als Stromquelle steht ein Akkupack ......(Firma,Modell) zur Verfügung. 
+Als Stromquelle steht ein Akkupack ......(Firma,Modell) zum Einsatz. 
 Hierbei ist wichtig, dass der Raspberry mind. 700 mA, besser 1 A zur Stromversorgung bekommt. 
-Bei niedrigerer Amperzahl arbeitet er oft nicht zuverlässig.
+Bei niedrigerer Amperzahl arbeitet der PC oft nicht zuverlässig.
 
-Ein schneller und großer RAM Speicher ist für unsere Zwecke wichtig, da viele Signale, teils sogar synchron, verarbeitet werden müssen.
+Ein schneller und großer RAM Speicher ist für unsere Zwecke wichtig, da viele Signale, teils sogar synchron, verarbEin 17-Zoll Monitor wird für die Bildschirmausgabe des Raspberry über HDMI zu DVI benutzteitet werden müssen.
 
 Für die Datenübertragung über das Netz benutzen wir einen Standard 300Mbit/s Wlan-Stick.
 
@@ -180,8 +170,9 @@ Der Raspberry Pi arbeitet mit einer ARM-Prozessorarchitektur.
 Diese Architektur wird gerne für embedded Systems, wie PDAs oder Router, eingesetzt.
 
 Sie ist auch auf jedem Smartphone zu finden, da sie den Vorteil einer sehr geringen Leistungsaufnahme bietet. 
-Erwähnenswert ist die Architektur deshalb, weil wir im Laufe des Projektes Schwierigkeiten hatten, auf die wir später eingehen werden.
 
+%Konfiguration von Linux???
+Erwähnenswert ist die Architektur deshalb, weil wir im Laufe des Projektes Schwierigkeiten hatten, auf die wir später eingehen werden
 Wir benutzen das auf Linux basierende Betriebssystem Raspbian.
 Dabei handelt sich um ein für Raspberry Pi optimiertes open-source Debian-System.
 Es enthält viele für die ARM-Architektur vorkompilierte Pakete (über 35.000), dazu auch Features wie etwa eine GUI.
@@ -207,8 +198,6 @@ Wir konnten uns leider jedoch zeitlich bedingt nicht mehr mit dieser Thematik be
 
 
 \section{Problem}
-
-%Motorsteuerung Problem ARM-Architektur x86, Paket muss neu kompiliert und konfiguriert werden
 
 Hauptproblem??
 
@@ -239,7 +228,9 @@ optional:
 \item Raspberry Pi auf Roboter ohne Kabelzgewirr %haben wir mit WLAN nicht
 \item Node des Raspberry beim Hochfahren automatisch starte
 \item Leichte Bedienbarkeit des Roboters
+
 \vspace{0,6cm}
+
 \item Streaming-Bild ruckelfrei verarbeiten
 \item unkonvertiert Echtzeitübertragung
 \item Ausgabe am externem Bildschirm
@@ -260,7 +251,6 @@ Die Unterstützung beliebiger Linuxsysteme wird von ROS grundsätzlich unterstü
 %TODO umschreiben
 
 Kontrollausgaben und ähnliches werden durch Horchen an Topics mithilfe von echo und durch Ausgabenbereiche im Quellcode durch das Netzwerk realisiert.
-
  
 %Horchen an Topics mit echo + Ausgabe im Code mithilfe ROS-Stream Fkt.
 
@@ -275,17 +265,38 @@ Ein Modulares und flexibles Netzwerk, sowie das einfache Einbinden von Repositor
 %durch ROS und catkin gegeben 
 %durch catkin gegeben
 
+
+\begin{itemize}
+\item Roboter soll bei Steuerung in richtige Richtungen fahren
+\item Roboter soll sofort auf Richtungsanweisungen reagieren
+\item Sensibilität der Steuerung sollte einstellbar sein
+\item Steuerung über WLAN
+\item Raspberry Pi auf Roboter ohne Kabelzgewirr %haben wir mit WLAN nicht
+\item Node des Raspberry beim Hochfahren automatisch starte
+\item Leichte Bedienbarkeit des Roboters
+
+\vspace{0,6cm}
+
+\item Streaming-Bild ruckelfrei verarbeiten
+\item unkonvertiert Echtzeitübertragung
+\item Ausgabe am externem Bildschirm
+\end{itemize}
+
+
 opt:
-abhängig vom richtigen Code der Motorsteuerung
 
-abhängig von Raspberry Pi Hardware und effizientem Code und
-guter Hardware
+%Die Steuerung des Roboters hängt vom fehlerfreien und sauberen Steuerungscode ab. Falls nötig, müsste man Veränderungen am bestehenden Code durchführen.
 
-abhängig vom Code
+Die Reaktionszeit 
+und Steuerung %hinzugefügt, weil oberer abschnitt auskommentiert
+wird durch zuverlässige und leistungstarke Hardware, sowie durch einen effizient geschriebenen Code bestimmt. In diesem Fall können wir die Hardware (mit ausßnahme des Pi) aufrüsten. Der Code lässt sich gar nicht oder nur mühsam verändern und austauschen.
+%abhängig vom richtigen Code der Motorsteuerung
 
-Hardware nötig Wlan-Stick, Akku-Pack 
+%abhängig von Raspberry Pi Hardware und effizientem Code und
+%guter Hardware
 
-sollte in Linux beim booten konfiguriert werden
+Der Bootvorgang des Raspbian soll so konfiguriert werden,   %TODO
+%sollte in Linux beim booten konfiguriert werden
 
 gegeben durch gute Smartphone App
 
