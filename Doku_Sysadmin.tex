@@ -43,17 +43,33 @@ von Denis Herdt und Almin Causevic
 %1-2 Seiten
 \subsection{Motivation}
 
-Wir haben uns für dieses Thema entschieden, weil wir mit Hard- und Software arbeiten wollten. 
+Die Entscheidung für dieses Thema fiel dadurch, dass es zukünftig genutzt werden kann und Soft-/Hardware kombiniert werden.
 
-Wir haben mitbekommen, wie umständlich z.B. der Roboter ''Volksbot'' im Robotiklabor der Hochschule mit einem zusätzlichen, auf dem Roboter platzierten Laptop gesteuert werden muss, der unnötig Platz und Gewicht beansprucht. Deshalb haben wir uns entschlossen, dieses Problem mithilfe des kleinen und leichten Raspberry Pi zu lösen.
-Die Idee stieß auch auf großes Interesse bei den Labormitarbeitern und bringt viel praktischen Nutzen.
+Im Robotiklabor der Hochschule Weingarten wird außerdem zur Zeit noch umsändlich ein zusätzlicher Laptop zur Steuerung der Roboter verwendet. Ein Beispiel dafür ist der ''Volksbot''. Durch die zusätzliche Last werden Platz, Gewicht und Stom stärker beansprucht. Dieses Problem kann mithilfe des kleinen und leichten Raspberry Pi gelöst werden.
 
-Unser Ziel möchten wir mithilfe des Software-Frameworks ROS (Robot Operating System) realisieren.
-Für ROS haben wir uns entschieden, weil es zur Zeit die aktuellste und inovativste Methode ist, ein flexibles Netzwerk von Komponenten für z.B. die Robotersteuerung zu realisieren. Es wird weltweit eingesetzt und könnte auch in Zukunft sehr nützlich werden.
+Durch den Einsatz des Software-Frameworks ROS (Robot Operating System) kann ein flexibles Netzwerk von Komponenten realisiert werden, in das der Raspberry eingebunden wird. Dies ist zur Zeit die aktuellste und inovativste Methode Robotersteuerung zu realisieren. ROS wird weltweit eingesetzt und kann auch in Zukunft sehr nützlich sein.
 
-Durch die Kombination mit der Mächtigkeit und Flexibilität von ROS und der geringen Größe und dem niedrigen Energieverbrauch des Pi eröffnen sich außerdem neue und effizientere Einsatzmöglichkeiten.
+Durch die Kombination mit der Mächtigkeit und Flexibilität von ROS und der gerinen Größe und niedrigen Energieverbrauch des Pi eröffnen sich neue und effiziente Einsatzmöglichkeiten.
 
-Sehr gut finden wir auch die Tatsache, dass wir mit Linux arbeiten können und dieses Projekt viel Konfiguration des Betriebssystems voraussetzt, da wir auch gerne mehr Praxiserfahrung mit Linux haben möchten.
+Zudem ist dieses Projekt für das Fach Sysadministration sinnvoll, weil mit Linux gearbeitet wird und viel Konfiguration des Betriebssystems vorausgesetzt wird.
+
+%ROS ist zur Zeit die aktuellste und inovativste Methode, ein flexibles Netzwerk von Komponenten für z.B. die Robotersteuerung zu realisieren. Es wird weltweit eingesetzt und kann auch in Zukunft sehr nützlich sein.
+
+%Wir haben uns für dieses Thema entschieden, weil wir mit Hard- und Software arbeiten wollten.
+
+%Wir haben mitbekommen, wie umständlich z.B. der Roboter ''Volksbot'' im Robotiklabor der Hochschule mit einem zusätzlichen, auf dem Roboter platzierten Laptop gesteuert werden muss, der unnötig Platz und Gewicht beansprucht. Deshalb haben wir uns entschlossen, dieses Problem mithilfe des kleinen und leichten Raspberry Pi zu lösen.
+%Die Idee stieß auch auf großes Interesse bei den Labormitarbeitern und bringt viel praktischen Nutzen.
+
+%Unser Ziel möchten wir mithilfe des Software-Frameworks ROS (Robot Operating System) realisieren.
+%Für ROS haben wir uns entschieden, weil es zur Zeit die aktuellste und inovativste Methode ist, ein flexibles Netzwerk von Komponenten für z.B. die Robotersteuerung zu realisieren. Es wird weltweit eingesetzt und könnte auch in Zukunft sehr nützlich werden.
+
+%Durch die Kombination mit der Mächtigkeit und Flexibilität von ROS und der geringen Größe und dem niedrigen Energieverbrauch des Pi eröffnen sich außerdem neue und effizientere Einsatzmöglichkeiten.
+
+%Sehr gut finden wir auch die Tatsache, dass wir mit Linux arbeiten können und dieses Projekt viel Konfiguration des Betriebssystems voraussetzt, da wir auch gerne mehr Praxiserfahrung mit Linux haben möchten.
+
+
+
+
 
 %Roboter Lab Anwendung von ROS und Möglichkeit, Roboter zu nutzen
 
@@ -74,23 +90,50 @@ Sehr gut finden wir auch die Tatsache, dass wir mit Linux arbeiten können und d
 
 Unser Hauptziel besteht darin, ROS auf dem Raspberry Pi aufzusetzen und zu nutzen. Dieses Ziel wird wie folgt unterteilt:\\
 
-Zunächst möchten wir ein passendes, auf Linux basierendes Betriebssystem auswählen und auf dem Raspberry Pi aufsetzen. In diesem Fall haben wir uns für Raspbian entschieden, da es zusätzlich am kopatibelsten zu ROS ist.
+\begin{itemize}
 
-Als nächstes wählen wir einen geeigneten Roboter aus. Die Kriterien dafür erarbeiten wir uns aus einer vorangegangenen ROS-Recherche.
+\item Recherche über Linux Systeme auf dem Raspberry Pi 
+\item Passendes Linux System auf Raspberry Pi aufsetzten			
+\item Recherche über ROS
+\item Geeigneten Roboter wählen (Recherche Verfügbarkeit, Komponenten etc.)
+\item Komponenten geschaffen (Wlan Stick, Akkupack, etc.)
+\item ROS auf Raspberry Pi aufsetzen
+\item Netzwerk zwischen mehreren ROS-Komponenten herstellen
+\item Netzwerk mithilfe von Testausgaben überprüfen
 
-Im Anschluss setzen wir ROS auf dem Raspberry Pi und mehreren Linux-Rechnern auf und stellen ein WLAN-Netzwerk zwischen den verschiedenen ROS-Komponenten her.
-Dieses Netzwerk wird mithilfe von Testausgaben überprüft.
+\end{itemize}
 
-Damit ist eine Grundlage für weitere Anwendungen für ROS auf dem Raspberry geschaffen.\\
+Mit diesen Zielen ist eine Grundlage für weitere Anwendungen mit ROS auf dem Raspberry geschaffen.\\
 
 {\bf optional}
 
-Bleibt am Ende noch genug Zeit, kompilieren wir ein Steuerungspaket für den ''Volksbots'' auf dem Raspberry. Zur Verbesserung der Usability integrieren wir ein Smartphone ins ROS-Netzwerk. Die Bewegungsrichtung und -geschwindigkeit des Roboters soll durch das Schwenken des Smartphones bestimmt werden.
+Da uns am Ende noch genügend Zeit zur Verfügung stand, haben wir folgende Punkte bearbeitet:
 
-Haben wir damit Erfolg und wiederum genügend Zeit zur Verfügung, sprechen wir die integrierte Kamera des Roboters an und streamen das Bild mithilfe des Netzwerkes auf einen externen Bildschirm.
+\begin{itemize}
 
-Da zukünftige Roboter Ihre Umgebung erkennen und sich sicher im Raum bewegen 
-sollen, sehen wir diese Tests als nützlich an.
+\item Steuerungspaket für ''Volksbot'' einbinden
+\item Verbesserung der Usability durch Smartphone-Steuerung
+\item Optimierung der WLAN-Verbindung am Raspberry
+ 
+\end{itemize}
+Bleibt am Ende noch genug Zeit, wird die integriete Kamera des Roboters angesprochen und das Bilde mithilfe des Netzwerkes auf einen externen Bildschirm übertragen.
+
+%Zunächst möchten wir ein passendes, auf Linux basierendes Betriebssystem auswählen und auf dem Raspberry Pi aufsetzen. In diesem Fall haben wir uns für Raspbian entschieden, da es zusätzlich am kopatibelsten zu ROS ist.
+
+%Als nächstes wählen wir einen geeigneten Roboter aus. Die Kriterien dafür erarbeiten wir uns aus einer vorangegangenen ROS-Recherche.
+
+%Im Anschluss setzen wir ROS auf dem Raspberry Pi und mehreren Linux-Rechnern auf und stellen ein WLAN-Netzwerk zwischen den verschiedenen ROS-Komponenten her.
+%Dieses Netzwerk wird mithilfe von Testausgaben überprüft.
+
+%Damit ist eine Grundlage für weitere Anwendungen für ROS auf dem Raspberry geschaffen.\\
+
+%{\bf optional}
+
+%Bleibt am Ende noch genug Zeit, kompilieren wir ein Steuerungspaket für den ''Volksbots'' auf dem Raspberry. Zur Verbesserung der Usability integrieren wir ein Smartphone ins ROS-Netzwerk. Die Bewegungsrichtung und -geschwindigkeit des Roboters soll durch das Schwenken des Smartphones bestimmt werden.
+
+%Haben wir damit Erfolg und wiederum genügend Zeit zur Verfügung, sprechen wir die integrierte Kamera des Roboters an und streamen das Bild mithilfe des Netzwerkes auf einen externen Bildschirm.
+
+%Da zukünftige Roboter Ihre Umgebung erkennen und sich sicher im Raum bewegen sollen, sehen wir diese Tests als nützlich an.
 
 %Roboter durch einen Raspberry Pi mithilfe von ROS steuern
 %Bild einer Webcam durch ROS auf einen Bildschirm streamen
@@ -105,30 +148,8 @@ auf die Ablösung eines Laptops durch den kleineren und leichteren Raspberry Pi 
 
 \subsection{Aufbau der Arbeit}
 
-\begin{itemize}
-
-\item Recherche über Linux Systeme auf dem Raspberry Pi
-\item Passendes Linux System auf Raspberry Pi gesetzt			
-\item Recherche über ROS
-\item Geeigneten Roboter gewählt (Recherche Verfügbarkeit, Komponenten etc.)
-\item Komponenten geschafft (Wlan Stick, Akkupack, etc.)
-\item ROS auf Raspberry Pi aufgesetzt
-\item Netzwerk zwischen mehreren ROS-Komponenten hergestellt
-\item Netzwerk mithilfe von Testausgaben überprüft \\
-
-\end{itemize}
-
-{\bf optional}
-
-\begin{itemize}
-
-\item Robotersteuerung wird zur Zeit implementiert
-
-
-%Roboter durch einen Raspberry Pi mithilfe von ROS steuern
-%Bild einer Webcam durch ROS auf einen Bildschirm streamen
-
-\end{itemize}
+In den Grundlagen werden alle wichtigen Komponenten und Aspekte genauer erklärt. Anschließend wird das Grundproblem, welches wir lösen wollen erläutert und verwandte Arbeiten aufgelistet. 
+Darauf Folgend werden die dadurch entstandenen Anforderungen und Lösungsvorschläge, sowie die Implementation beschrieben.
 
 \section{Grundlagen}
 %6-8 Seiten
@@ -195,22 +216,6 @@ Es gibt uns die Möglichkeit, jegliche Hardware-Funktionalität anzusteuern.
 Beispielsweise können LED-Leuchten oder der Start-Knopf der Kaffeemaschine damit über ROS gesteuert werden.
 Wir konnten uns leider jedoch zeitlich bedingt nicht mehr mit dieser Thematik beschäftigen, es bietet aber Anreiz für noch mehr Ansätze und Umsetzungen mithilfe des Raspberry Pi und ROS.
 
-
-\subsection{Smartphone}
-
-Es wird ein auf Android basierendes Smartphone verwendet.
-Wir benutzen auf dem Smartphone eine in einer Projekt-Arbeit entstandene App.
-Sie bindet sich an einen ROS-Master (später näher erläutert) und übergibt die X und -Y Koordinaten relativ zu sich weiter.
-Diese Werte können für die Steuerung des Motors verwendet werden, indem jeweils ein Wert an eine Radachse geliefert wird. Dieser Wert bildet die Geschwindigkeit des Rades ab.
-Zur erleichterten Bedienung stellt uns die App eine GUI zur Verfügung. 
-
-\subsection{Volksbot}
-
-VolksBot ist ein Roboterbaukastensystem.
-Mit Hilfe des Baukastens können sehr schnell und preiswert unterschiedlichste Varianten mobiler Roboter hergestellt werden.
-Der Volksbot wurde an der Hochschule Weingarten für den RoboCup verwendet.
-%Wir brauchen hier mehr Infos, wo wurde er verwendet, Besonderheiten
-%Bild
 \subsection{ROS}
 %Zitate??
 ROS ist kein eigentliches Betriebssystem im herkömmlichem Sinne, sondern eine Art strukturierte Kommunikationsschicht.
@@ -264,6 +269,22 @@ Es ist in 4 Spaces unterteilt:
 \end{itemize}
 Catkin bietet uns eine komfortable Möglichkeit über cmake, ROS Packages zu compilieren, Tests an Ihnen durchzuführen und sie schließlich zu installieren.
 
+\subsection{Volksbot}
+
+VolksBot ist ein Roboterbaukastensystem.
+Mit Hilfe des Baukastens können sehr schnell und preiswert unterschiedlichste Varianten mobiler Roboter hergestellt werden.
+Der Volksbot wurde an der Hochschule Weingarten für den RoboCup verwendet.
+%Wir brauchen hier mehr Infos, wo wurde er verwendet, Besonderheiten
+%Bild
+
+\subsection{Smartphone}
+
+Es wird ein auf Android basierendes Smartphone verwendet.
+Wir benutzen auf dem Smartphone eine in einer Projekt-Arbeit entstandene App.
+Sie bindet sich an einen ROS-Master (später näher erläutert) und übergibt die X und -Y Koordinaten relativ zu sich weiter.
+Diese Werte können für die Steuerung des Motors verwendet werden, indem jeweils ein Wert an eine Radachse geliefert wird. Dieser Wert bildet die Geschwindigkeit des Rades ab.
+Zur erleichterten Bedienung stellt uns die App eine GUI zur Verfügung. 
+
 \section{Problem}
 
 Viele der heutigen Roboter mit ROS-Systemen besitzen einen leistungsstarken und klobigen PC an Ihrer Seite.
@@ -307,7 +328,7 @@ Master-Thesis:
 \item Roboter soll sofort auf Richtungsanweisungen reagieren
 \item Sensibilität der Steuerung sollte einstellbar sein
 \item Steuerung über WLAN
-\item Raspberry Pi auf Roboter ohne Kabelzgewirr %haben wir mit WLAN nicht
+\item Raspberry Pi auf Roboter ohne Kabelgewirr %haben wir mit WLAN nicht
 \item ROS-Core des Raspberry beim Hochfahren automatisch starte
 \item Leichte Bedienbarkeit des Roboters
 
@@ -409,9 +430,10 @@ Da die Installation und das Kompilieren von Source sehr zeitaufwendig ist, benut
 Da jetzt ROS in Raspbian integriert ist, kann man auf ROS-interne Shell Befehle zugreifen.
 %Shell Bilder, Bsp. von Kommandos
 Für uns ist der Befehl roscore wichtig.
-Wir setzen in unserer exports Datei die ROS_MASTER_URI IP-Adresse auf die des Raspberry Pi und dazu den Standardport 11311.
+Wir setzen in unserer exports Datei die ROS MASTER URI IP-Adresse auf die des%_ Raspberry Pi und dazu den Standardport 11311.
 Dies macht den Raspberry zum Master Knotenpunkt, nun können andere Linux-Systeme mit ROS über diesen kommunizieren.
-Sie müssen zusätzlich in der exports die ROS_MASTER_URI IP-Adresse des Raspberry angeben.
+Sie müssen zusätzlich in der exports die ROS MASTER URI IP-Adresse des Raspberry %_ 
+angeben.
 
 \subsection{Testen des Netzwerks}
 
@@ -431,7 +453,7 @@ Da die Koordinaten mit denen auf dem Handy übereinstimmen, ist der Netzwerktest
 \subsection{Steuerung des Volksbot}
 
 Für die Ansteuerung des Motorcontrollers des Volksbot benutzen wir ein in einer Projekt-Arbeit entstandenes ROS Package.
-Nach einiger Konfiguration konnten wir dieses Package mithilfe catkin_make kompilieren und in unser Projekt integrieren.
+Nach einiger Konfiguration konnten wir dieses Package mithilfe catkin make %_ kompilieren und in unser Projekt integrieren.
 Über eine roslaunch Datei wurden die nötigen Nodes und Topics des Packages gestartet.
 
 Die Netzwerk-Funktionalität ist nach den obigen Tests gegeben.
@@ -468,7 +490,7 @@ Der Raspberry wird mithilfe eines USB zu VGA Adapters an den Volksbot angeschlos
 Das Projekt ist durch die hohen Anforderungen und den knappen Zeitraum sehr Zeitintensiv. Allerdings war es auch sehr interessant. Wir haben viel über Linux und ROS gelernt und uns mit Hardware- und Netzwerkkonfiguration außeinander gesetz1 Seitet.
 
 %hohe Anforderungen für knappen Zeitraum
-%interessantes, anspruchsvolles Projekt           
+%interessantes, anspruchsvolles Projekt
 %viel über Linux und Ros gelernt
 %Hardware- und Netzwerkkonfiguration interessant
 
