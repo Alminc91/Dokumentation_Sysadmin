@@ -40,7 +40,7 @@ von Denis Herdt und Almin Causevic
 \pagebreak
 
 \section{Einleitung}
-1-2 Seiten
+%1-2 Seiten
 \subsection{Motivation}
 
 Wir haben uns für dieses Thema entschieden, weil wir mit Hard- und Software arbeiten wollten. 
@@ -83,7 +83,7 @@ Dieses Netzwerk wird mithilfe von Testausgaben überprüft.
 
 Damit ist eine Grundlage für weitere Anwendungen für ROS auf dem Raspberry geschaffen.\\
 
-{\bf optional}\\
+{\bf optional}
 
 Bleibt am Ende noch genug Zeit, kompilieren wir ein Steuerungspaket für den ''Volksbots'' auf dem Raspberry. Zur Verbesserung der Usability integrieren wir ein Smartphone ins ROS-Netzwerk. Die Bewegungsrichtung und -geschwindigkeit des Roboters soll durch das Schwenken des Smartphones bestimmt werden.
 
@@ -266,12 +266,27 @@ Catkin bietet uns eine komfortable Möglichkeit über cmake, ROS Packages zu com
 
 \section{Problem}
 
-Hauptproblem??
+Viele der heutigen Roboter mit ROS-Systemen besitzen einen leistungsstarken und klobigen PC an Ihrer Seite.
+Doch für viele Roboteranwendungen würde auch ein kleinerer, leistungschwächerer PC ausreichen.
+Dadurch ergeben sich neue Vorteile.
+
+\begin{itemize}
+\item weniger Gewicht
+\item weniger Kosten
+\item Energieverbrauch sinkt $\rightarrow$ Akku hält länger
+\item Die Größe des Roboters nimmt ab
+\end{itemize}
+
+In unserem Fall wird der Roboter Volksbot mit einem für diesen Zweck überdimensionierten Laptop gesteuert. Wir wollen dieses Problem beheben und uns die obigen Vorteile verschaffen, indem wir ROS auf einem Raspberry Pi laufen lassen.
 
 \subsection{Verwandte Arbeiten}
 
-Steffen, Marc
-ROS-Tut
+Master-Thesis:
+\begin{enumerate}
+
+\item Robot Navigation in Unknown Environment Based on Combined 2D and 3D Information, Marc Götz, August 2013
+\item Semi-Autonomous Grasping of Unknown Objects, Steffen Pfiffner, November 2013
+\end{enumerate}
 
 \section{Anforderungen}
 
@@ -285,7 +300,7 @@ ROS-Tut
 \item Repositories sollen leicht in Projekte eingebunden werden
 \end{itemize}
 
-optional:
+{\bf optional}
 
 \begin{itemize}
 \item Roboter soll bei Steuerung in richtige Richtungen fahren
@@ -327,7 +342,7 @@ Ein Modulares und flexibles Netzwerk, sowie das einfache Einbinden von Repositor
 %durch ROS und catkin gegeben 
 %durch catkin gegeben
 
-optional:
+{\bf optional:}
 
 Die Reaktionszeit 
 und Steuerung %hinzugefügt, weil oberer abschnitt auskommentiert
@@ -359,28 +374,84 @@ Bis jetzt sind unsere Lösungsansätze realativ erfolgreich gewesen. Es könnten
 
 \section{Implementation}
 
-%TODO ROS Netzwerk (topics, nodes, catkin...)
 
+%ROS Netzwerk (topics, nodes, catkin...)
+\subsection{Raspbian}
 
-%TODO Linux SD Karte Pi
+%Linux SD Karte Pi
+Zuerst mussten wir das Betriebssystem Raspbian auf dem Pi aufsetzen.
+Hierzu gibt es 2 mögliche Vorgehensweisen:
+\begin{enumerate}
+\item Installation mit NOOBS
+\item Überschreiben der SD-Karte mithilfe dd
+\end{enumerate}
 
+Wir haben uns für die 2. Methode entschieden, da NOOBS weniger Linux Kofiguration erfordert und uns unnötige Images neben Raspbian bietet.
+%shasum zur Kontrolle
+\begin{enumerate}
+\item Mit df -h herausfinden, welchen Namen die SD-Karte trägt (z. B. sdb)
+\item mit dd bs=4M if=~/2012-12-16-wheezy-raspbian.img of=/dev/sdd Image auf SD-Karte schreiben
+\end{enumerate}
 
-Datenübertragung an Volksbot mithilfe eines USB zu VGA Adapters. Dieser wird per USB an den Raspberry Pi und per VGA an das Steuerungsmodul des Roboters angeschlossen.
+\subsection{ROS aufsetzen}
+
+Auch hier gibt es 2 Wege, ROS auf Raspbian zu kompilieren.
+%Vorteile, Nachteile
+\begin{enumerate}
+\item von source
+\item binary packages
+\end{enumerate}
+
+Da die Installation und das Kompilieren von Source sehr zeitaufwendig ist, benutzen wir die vorhandenen binary packages für ARM.
+
+\subsection{Netzwerk aufsetzen}
+%welche, näher erläutern, sourcen
+Da jetzt ROS in Raspbian integriert ist, kann man auf ROS-interne Shell Befehle zugreifen.
+%Shell Bilder, Bsp. von Kommandos
+Für uns ist der Befehl roscore wichtig.
+Wir setzen in unserer exports Datei die ROS_MASTER_URI IP-Adresse auf die des Raspberry Pi und dazu den Standardport 11311.
+Dies macht den Raspberry zum Master Knotenpunkt, nun können andere Linux-Systeme mit ROS über diesen kommunizieren.
+Sie müssen zusätzlich in der exports die ROS_MASTER_URI IP-Adresse des Raspberry angeben.
+
+\subsection{Testen des Netzwerks}
+
+Über das ROS Netzwerk können nun Datenpakete gesendet werden.
+Hierzu schicken wir mithilfe der App eine Message, welche die X und Y Koordinaten enthält.
+
+Wir geben in der App die IP des Masters (Pi) an. Das Handy fungiert nun als ROS Node und versendet (publish) diese Messages über einen Topic, an welchem der Pi horcht (subscribe).
+
+Raspberry Pi kann nun mithilfe des ROS Befehls
+
+	rostopic echo ''Topicbezeichnung''
+	
+aus diesem Topic alle Daten auslesen und ausgeben.
+%Bilder der Testdaten
+Da die Koordinaten mit denen auf dem Handy übereinstimmen, ist der Netzwerktest erfoglreich.
+
+\subsection{Steuerung des Volksbot}
+
+Für die Ansteuerung des Motorcontrollers des Volksbot benutzen wir ein in einer Projekt-Arbeit entstandenes ROS Package.
+Nach einiger Konfiguration konnten wir dieses Package mithilfe catkin_make kompilieren und in unser Projekt integrieren.
+Über eine roslaunch Datei wurden die nötigen Nodes und Topics des Packages gestartet.
+
+Die Netzwerk-Funktionalität ist nach den obigen Tests gegeben.
+Die Rohdaten des Smartphone-Sensors werden durch das ROS Steuerungspaket entsprechend verändert und über den Raspberry an den Volksbot gesendet.
+Der Raspberry wird mithilfe eines USB zu VGA Adapters an den Volksbot angeschlossen. Dieser wird per USB an den Raspberry Pi und per VGA an das Steuerungsmodul des Roboters angeschlossen.
 
 
 %TODO Konfiguration Motorsteuerung-Paket und Compilieren
 
 
-Kontrollausgaben:
-\begin{itemize}
+%Kontrollausgaben:
+%\begin{itemize}
 
-\item Horchen am ROS-Topic
+%\item Horchen am ROS-Topic
 
-\subitem rostopic echo ''Topicbezeichnung''
+%\subitem rostopic echo ''Topicbezeichnung''
 
-\item Konsolenausgaben
+%\item  
 
-\end{itemize}
+%\end{itemize}
 
 %TODO Netzwerkkomponenten zusammen arbeiten lassen (Hard/-Software)
 
@@ -392,10 +463,9 @@ Kontrollausgaben:
 
 
 \section{Fazit}
-1 Seite
 \subsection{Zusammenfassung}
 
-Das Projekt ist durch die hohen Anforderungen und den knappen Zeitraum sehr Zeitintensiv. Allerdings war es auch sehr interessant. Wir haben viel über Linux und ROS gelernt und uns mit Hardware- und Netzwerkkonfiguration außeinander gesetzt.
+Das Projekt ist durch die hohen Anforderungen und den knappen Zeitraum sehr Zeitintensiv. Allerdings war es auch sehr interessant. Wir haben viel über Linux und ROS gelernt und uns mit Hardware- und Netzwerkkonfiguration außeinander gesetz1 Seitet.
 
 %hohe Anforderungen für knappen Zeitraum
 %interessantes, anspruchsvolles Projekt           
@@ -416,7 +486,7 @@ Zum Beispiel kann man nicht nur Roboter, sondern durch das GPIO-Interface auch v
 
 \subsection{Eigene Leistung}
 
-Durch unser Projekt wird der Laptop am ''Volksbot'' durch einen viel kleineren und leichteren Raspberry Pi ersetzt. Da wir mit ROS arbeiten, kann der Pi mit nur wenig Aufwand auch an anderen Robotern eingesetzt werden.
+Durch unser Projekt wird der Laptop am ''Volksbot'' durch einen viel kleineren und leichteren Raspberry Pi ersetzt. Außerdem eröffnet sich uns die Möglichkeit, den Pi als Hardware-Node zu benutzen.
 
 \section{Quellen}
 \begin{verbatim}
