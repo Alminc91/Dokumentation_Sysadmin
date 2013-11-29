@@ -198,7 +198,7 @@ Wir konnten uns leider jedoch zeitlich bedingt nicht mehr mit dieser Thematik be
 
 \subsection{Smartphone}
 
-Es wird ein aud Android basierendes Smartphone verwendet.
+Es wird ein auf Android basierendes Smartphone verwendet.
 Wir benutzen auf dem Smartphone eine in einer Projekt-Arbeit entstandene App.
 Sie bindet sich an einen ROS-Master (später näher erläutert) und übergibt die X und -Y Koordinaten relativ zu sich weiter.
 Diese Werte können für die Steuerung des Motors verwendet werden, indem jeweils ein Wert an eine Radachse geliefert wird. Dieser Wert bildet die Geschwindigkeit des Rades ab.
@@ -223,7 +223,7 @@ Die Ziele von ROS können zusammengefasst werden zu:
 \item open source and free (unter der BSD Lizenz)
 \end{itemize}
 Es ist das einzig existierende Framework, welches sich auf diese Kriterien spezialisiert.
-Den Entwicklern von ROS ging es vor allem um die Vereinfachung, Software für die hohe Zahl an verschiedenen Roboter zu schreiben.
+Den Entwicklern von ROS ging es vor allem um die Vereinfachung, Software für eine hohe Zahl an verschiedenen Roboter zu schreiben.
 %Zitat
 ROS stellt dazu Bibliotheken und Werkzeuge, Hardware Abstraktion, Gerätetreiber, Bibliotheken, Visualisierungen, Nachrichtenvermittlung, Packetverwaltung und andere Komponenten zur Verfügung.
 
@@ -343,10 +343,6 @@ Um bequem mit dem Raspberry arbeiten zu können, ohne jedes mal den ROS-Core sta
 
 %gegeben durch gute Smartphone App
 
-%\item Streaming-Bild ruckelfrei verarbeiten
-%\item unkonvertiert Echtzeitübertragung
-%\item Ausgabe am externem Bildschirm
-
 vspace{0,6cm}
 
 Ein sauberes und störungsfreies Übertragungsbild hängt hauptsächlich von der Hardware des Raspberry Pi, aber auch von der Codierung ab. Der Stream soll durch  Umleiten des Bildes über das Netzwerk an einen PC-Monitor realisiert werden. Falls dabei Probleme auftreten sollten, können wir versuchen die Codierung zu bearbeiten oder leistungsverstärkende Hardware an den Pi anschließen.
@@ -363,16 +359,16 @@ Bis jetzt sind unsere Lösungsansätze realativ erfolgreich gewesen. Es könnten
 
 \section{Implementation}
 
-%ROS Netzwerk (topics, nodes, catkin...)
+%TODO ROS Netzwerk (topics, nodes, catkin...)
 
 
-%Linux SD Karte Pi
+%TODO Linux SD Karte Pi
 
 
 Datenübertragung an Volksbot mithilfe eines USB zu VGA Adapters. Dieser wird per USB an den Raspberry Pi und per VGA an das Steuerungsmodul des Roboters angeschlossen.
 
 
-%Konfiguration Motorsteuerung-Paket und Compilieren
+%TODO Konfiguration Motorsteuerung-Paket und Compilieren
 
 
 Kontrollausgaben:
@@ -382,17 +378,17 @@ Kontrollausgaben:
 
 \subitem rostopic echo ''Topicbezeichnung''
 
-\item 
+\item Konsolenausgaben
 
 \end{itemize}
 
-%Netzwerkkomponenten zusammen arbeiten lassen (Hard/-Software)
+%TODO Netzwerkkomponenten zusammen arbeiten lassen (Hard/-Software)
 
 
-%Wlan -> Teilproblem
+%TODO Wlan -> Teilproblem
 
 
-%Kamera -> Teilproblem Zeit
+%TODO Kamera -> Teilproblem Zeit
 
 
 \section{Fazit}
