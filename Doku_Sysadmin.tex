@@ -1,6 +1,8 @@
 \documentclass[12pt]{article}
  \usepackage[german]{babel}
  \usepackage[utf8]{inputenc}
+ \usepackage{listings}
+  \usepackage{color}
  \usepackage{graphicx}
  \author{Denis Herdt, Almin Causevic}
  \title{ROS auf dem Rapberry Pi}
@@ -8,6 +10,26 @@
  \setlength{\parskip}{5pt plus 2pt minus 1pt}  % Abstand zwischen Absaetzen
  \frenchspacing
  \sloppy
+  \lstset{
+   basicstyle=\small\ttfamily,
+   keywordstyle=\bfseries\ttfamily\color{orange},
+   stringstyle=\color{green}\ttfamily,
+   commentstyle=\color{middlegray}\ttfamily,
+   emph={square}, 
+   emphstyle=\color{blue}\texttt,
+   emph={[2]root,base},
+   emphstyle={[2]\color{black}\texttt},
+   showstringspaces=false,
+   flexiblecolumns=false,
+   tabsize=2,
+   frame=tBlR
+   numbers=left,
+   numberstyle=\tiny,
+   numberblanklines=false,
+   stepnumber=1,
+   numbersep=10pt,
+   xleftmargin=15pt
+ }
  
  
 \begin{document}
@@ -374,44 +396,61 @@ Bis jetzt sind unsere Lösungsansätze realativ erfolgreich gewesen. Es könnten
 
 \section{Implementation}
 
-
-%ROS Netzwerk (topics, nodes, catkin...)
 \subsection{Raspbian}
 
-%Linux SD Karte Pi
-Zuerst mussten wir das Betriebssystem Raspbian auf dem Pi aufsetzen.
+Zuerst wird das Betriebssystem Raspbian auf dem Pi aufgesetzt.
 Hierzu gibt es 2 mögliche Vorgehensweisen:
 \begin{enumerate}
 \item Installation mit NOOBS
-\item Überschreiben der SD-Karte mithilfe dd
+\item Flashen der SD-Karte (Linux mittels dd)
 \end{enumerate}
 
-Wir haben uns für die 2. Methode entschieden, da NOOBS weniger Linux Kofiguration erfordert und uns unnötige Images neben Raspbian bietet.
-%shasum zur Kontrolle
-\begin{enumerate}
-\item Mit df -h herausfinden, welchen Namen die SD-Karte trägt (z. B. sdb)
-\item mit dd bs=4M if=~/2012-12-16-wheezy-raspbian.img of=/dev/sdd Image auf SD-Karte schreiben
-\end{enumerate}
+Wir haben uns für die 2. Methode entschieden, da NOOBS 6 verschiedene Images anbietet, doch wird in diesem Fall nur Raspbian benötigt.
+Zudem erfordert die 2. Vorgehensweise mehr Arbeit mit dem Linux Betriebssystem, was in dieser Vorlesung nur vorteilhaft sein kann.
+Die genauen Installationsschritte entnehmen Sie bitte der Quelle (raspbian...) unter dem Unterpunkt Using the Linux command line. \\
+Um mögliche Fehlerquellen schon beim Herunterladen der Image Datei zu vermeiden, wird empfohlen, wie in der Anleitung beschrieben die sha1sum zu vergleichen.
+%\begin{enumerate}
+%\item Mit df -h herausfinden, welchen Namen die SD-Karte trägt (z. B. sdb)
+%\item mit dd bs=4M if=~/2012-12-16-wheezy-raspbian.img of=/dev/sdd Image %auf SD-Karte schreiben
+%\end{enumerate}
+
+Nun muss nur noch die SD-Karte in den Raspberry eingesteckt werden. Falls eine grüne Leuchte am Raspberry blinkt oder eine Bildschirmausgabe an einem Monitor erscheint, ist dieser Schritt gelungen.
 
 \subsection{ROS aufsetzen}
 
-Auch hier gibt es 2 Wege, ROS auf Raspbian zu kompilieren.
+Es gibt momentan 2 sinnvolle Wege, ROS auf dem Raspbian System aufzusetzen.
 %Vorteile, Nachteile
 \begin{enumerate}
-\item von source
-\item binary packages
+\item Source packages des ROS-Kerns kompilieren
+\item binary packages für die ARM-Architektur installieren
 \end{enumerate}
 
-Da die Installation und das Kompilieren von Source sehr zeitaufwendig ist, benutzen wir die vorhandenen binary packages für ARM.
+Da die Installation und das Kompilieren von Source zwar sehr lehrreich, doch auch relativ zeitaufwendig ist, benutzen wir die vorhandenen binary packages für ARM. 
+Hierzu einfach nach dieser Anleitung vorgehen (Quelle..) \\
+Leider werden dadurch nur die grundlegendsten Packages von ROS unterstützt.
+Da ein großer Vorteil von ROS die Modularität ist, können leicht benötigte packages über catkin nachinstalliert werden.
+Dazu weiter unten die Vorgehensweise erklärt am Beispiel des packages zur Steuerung des Roboters.
 
 \subsection{Netzwerk aufsetzen}
 %welche, näher erläutern, sourcen
-Da jetzt ROS in Raspbian integriert ist, kann man auf ROS-interne Shell Befehle zugreifen.
+ROS integriert sich sehr gut in die Shell des Linux Systems ein.
+Unterstützt werden mehrere Shell-Typen. In diesem Projekt wird die Bourne Again Shell verwendet.
+Damit man auf die ROS typischen Shell Befehle Zugriff hat, muss zuerst gesourced werden.
+
+ \begin{lstlisting}
+ source /opt/ros/groovy/setup.bash
+ \end{lstlisting}
+
+Mithilfe des source Befehls werden die für ROS relevanten Pfade gespeichert.
+%hier vllt. Bild des Inhaltes von ROS
 %Shell Bilder, Bsp. von Kommandos
+
+%ab hier weiter!!!!
+
 Für uns ist der Befehl roscore wichtig.
-Wir setzen in unserer exports Datei die ROS_MASTER_URI IP-Adresse auf die des Raspberry Pi und dazu den Standardport 11311.
+Wir setzen in unserer exports Datei die ROS!MASTER!URI IP-Adresse auf die des Raspberry Pi und dazu den Standardport 11311.
 Dies macht den Raspberry zum Master Knotenpunkt, nun können andere Linux-Systeme mit ROS über diesen kommunizieren.
-Sie müssen zusätzlich in der exports die ROS_MASTER_URI IP-Adresse des Raspberry angeben.
+Sie müssen zusätzlich in der exports die ROS!MASTER!URI IP-Adresse des Raspberry angeben.
 
 \subsection{Testen des Netzwerks}
 
@@ -431,7 +470,7 @@ Da die Koordinaten mit denen auf dem Handy übereinstimmen, ist der Netzwerktest
 \subsection{Steuerung des Volksbot}
 
 Für die Ansteuerung des Motorcontrollers des Volksbot benutzen wir ein in einer Projekt-Arbeit entstandenes ROS Package.
-Nach einiger Konfiguration konnten wir dieses Package mithilfe catkin_make kompilieren und in unser Projekt integrieren.
+Nach einiger Konfiguration konnten wir dieses Package mithilfe catkin!make kompilieren und in unser Projekt integrieren.
 Über eine roslaunch Datei wurden die nötigen Nodes und Topics des Packages gestartet.
 
 Die Netzwerk-Funktionalität ist nach den obigen Tests gegeben.
@@ -499,5 +538,20 @@ http://de.wikipedia.org/wiki/ARM-Architektur
 http://www.rn-wissen.de/index.php/Raspberry_PI:_GPIO
 
 \end{verbatim}
+
+
+
+ 
+ \begin{lstlisting}[caption={ein paar Zeilen code}\label{lst:test123},captionpos=t]
+ 
+ for i:=maxint to 0 do 
+    begin 
+    j:=square(root(i)); 
+ end; 
+ 
+ int main(void)  {
+ printf{"yo");
+ }
+ \end{lstlisting}
 
 \end{document}
