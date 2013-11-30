@@ -438,8 +438,10 @@ Um mögliche Fehlerquellen schon beim Herunterladen der Image Datei zu vermeiden
 Nun muss nur noch die SD-Karte in den Raspberry eingesteckt werden. Falls eine grüne Leuchte am Raspberry blinkt oder eine Bildschirmausgabe an einem Monitor erscheint, ist dieser Schritt gelungen.
 
 \subsection{ROS aufsetzen}
-
-Es gibt momentan 2 sinnvolle Wege, ROS auf dem Raspbian System aufzusetzen.
+Willow Garage stellt seit der Entstehung von ROS mehrerere Distributionen zur Verfügung.
+Für den Raspian ist die momentan zweitaktuellste Distribution Groovy zu empfehlen. 
+Die aktuelle Version Hydro wird noch nicht unterstützt. \\
+Es gibt 2 sinnvolle Wege, ROS Groovy auf dem Raspbian System aufzusetzen.
 %Vorteile, Nachteile
 \begin{enumerate}
 \item Source packages des ROS-Kerns kompilieren
@@ -450,44 +452,150 @@ Da die Installation und das Kompilieren von Source zwar sehr lehrreich, doch auc
 Hierzu einfach nach dieser Anleitung vorgehen (Quelle..) \\
 Leider werden dadurch nur die grundlegendsten Packages von ROS unterstützt.
 Da ein großer Vorteil von ROS die Modularität ist, können leicht benötigte packages über catkin nachinstalliert werden.
-Dazu weiter unten die Vorgehensweise erklärt am Beispiel des packages zur Steuerung des Roboters.
-
-\subsection{Netzwerk aufsetzen}
+Dazu weiter unten die Vorgehensweise erklärt am Beispiel des packages zur Steuerung des Roboters.\\
+\\
 %welche, näher erläutern, sourcen
 ROS integriert sich sehr gut in die Shell des Linux Systems ein.
 Unterstützt werden mehrere Shell-Typen. In diesem Projekt wird die Bourne Again Shell verwendet.
+ROS bietet für seine Systemumgebung Äquivalente zu den wichtigsten Shell Befehlen, beispielsweise roscd für cd oder rosls für ls. \\
+Dadurch ergibt sich der Vorteil, nicht den vollständigen Pfad zu einem ROS package oder Verzeichnis eingeben zu müssen. Beispielsweise ist es möglich sofort in ein ROS Verzeichnis mit roscd zu wechseln, ohne den vollständigen Pfad mittels cd eingeben zu müssen. \\
 Damit man auf die ROS typischen Shell Befehle Zugriff hat, muss zuerst gesourced werden.
 
  \begin{lstlisting}
  source /opt/ros/groovy/setup.bash
  \end{lstlisting}
 
-Mithilfe des source Befehls werden die für ROS relevanten Pfade gespeichert.
-%hier vllt. Bild des Inhaltes von ROS
+Der Source Befehl bewirkt, dass die Pfade zu den ROS Verzeichnissen dem Linux System bekannt gemacht werden.
+%TODO hier vllt. Bild des Inhaltes von ROS
 %Shell Bilder, Bsp. von Kommandos
+%TODO in .bashrc eintragen!!
 
-%ab hier weiter!!!!
+Es empfiehlt sich, sich mit den typischen ROS Befehlen etwas vertraut zu machen. (Quelle... Tutorials) \\
+Mit diesen Einstellungen sollte es kein Problem mehr sein, ein Netzwerk zwischen Systemen aufzusetzen.
+\subsection{Netzwerk aufsetzen}
+%Vorrausetzungen für das ROS Netzwerk
+Damit ein Netzwerk aufgesetzt werden kann, muss ein Linuxsystem zum Master werden.
+%Zu diesem Zweck gehen Sie bitte nach diesem Tutorial vor (Quelle %http://wiki.ros.org/ROS/Tutorials/MultipleMachines)
+Im Grunde ist es wichtig, in allen Systemen des Netzwerks in export die IP-Adresse und die Port-Nummer (Standard: 11311) des Systems anzugeben, welches als Master dienen soll.
+Eine der Möglichkeiten sich die IP-Adresse des Systems anzeigen zu lassen ist der Shell Befehl ifconfig.
+%TODO %Bild von ifconfig einfügen + Highlighting der IP
+Die IP lässt sich leicht aus den Informationen herauslesen.
 
-Für uns ist der Befehl roscore wichtig.
-Wir setzen in unserer exports Datei die ROS!MASTER!URI IP-Adresse auf die des Raspberry Pi und dazu den Standardport 11311.
-Dies macht den Raspberry zum Master Knotenpunkt, nun können andere Linux-Systeme mit ROS über diesen kommunizieren.
-Sie müssen zusätzlich in der exports die ROS!MASTER!URI IP-Adresse des Raspberry angeben.
+{\bf ROS Workspace anlegen:}
 
+Für ROS sollte noch ein Workspace mit catkin erzeugt werden.
+Quelle: http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment
+4. Create a ROS Workspace
+Auch das Sourcen des Workspace sollte am besten in die .bashrc, wie oben gezeigt, aufgenommen werden. \\
+Es noch zusätzlich ein Beispiel package erzeugt, welches später zum Testen des Netzwerks erforderlich ist.
+Dazu in das Source Verzeichnis des catkin Workspace wechseln
+
+ \begin{lstlisting}
+ cd ~/catkin_ws/src
+ \end{lstlisting}
+
+und ein package erzeugen. 
+
+ \begin{lstlisting}
+ catkin_create_pkg beginner_tutorials
+ std_msgs rospy roscpp
+ \end{lstlisting}
+
+Das package sollte noch compiliert werden.
+Erneut in  das catkin Workspace wechseln
+
+ \begin{lstlisting}
+ cd ~/catkin_ws
+ \end{lstlisting}
+
+und  
+ 
+ \begin{lstlisting}
+ catkin_make
+ \end{lstlisting}
+ 
+ausführen.
+%Für uns ist der Befehl roscore wichtig.
+%Wir setzen in unserer exports Datei die ROS!MASTER!URI IP-Adresse auf die %des Raspberry Pi und dazu den Standardport 11311.
+%Dies macht den Raspberry zum Master Knotenpunkt, nun können andere Linux-%Systeme mit ROS über diesen kommunizieren.
+%Sie müssen zusätzlich in der exports die ROS!MASTER!URI IP-Adresse des %Raspberry angeben.
 \subsection{Testen des Netzwerks}
 
-Über das ROS Netzwerk können nun Datenpakete gesendet werden.
-Hierzu schicken wir mithilfe der App eine Message, welche die X und Y Koordinaten enthält.
+Um das bestehende Netzwerk zu testen, können Datenpakete zwischen den Systemen verschickt werden.
+Zuerst sollte der Master ansprechbar sein.
+Hierfür wird der Kern von ROS mit dem Shell Befehl 
 
-Wir geben in der App die IP des Masters (Pi) an. Das Handy fungiert nun als ROS Node und versendet (publish) diese Messages über einen Topic, an welchem der Pi horcht (subscribe).
+ \begin{lstlisting}
+ roscore
+ \end{lstlisting}
 
-Raspberry Pi kann nun mithilfe des ROS Befehls
+gestartet. \\
+%TODO Bild der Ausgabe des Kerns mit Highlighting der IP URI
+Falls bei Eingabe des Befehls
 
-	rostopic echo ''Topicbezeichnung''
+ \begin{lstlisting}
+ rosnode list
+ \end{lstlisting}
+
+als Antwort mindestens ein Node (/rosout) erscheint, läuft der Kern ordnungsgemäß. \\
+Um nun einfache Testausgaben zwischen Systemen zu schicken, werden zwei ROS Nodes und ein Topic zur Kommunikation eingerichtet.
+Auf dem ROS Master wird ein listener Node (Subscriber) gestartet, der Quellcode befindet sich unter 1.1.1 The Code. \\
+Auf einem anderen ROS System wird ein talker Node (Publisher) gestartet, der Quellcode befindet sich unter 1.2.1 The Code. \\
+%http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29
+Es kann auch der talker anstatt des listeners auf dem Master ausgeführt werden.
+Es sollte nicht vergessen werden, die Quelldateien mittels
+
+ \begin{lstlisting}
+ chmod +x Dateiname.py
+ \end{lstlisting}
+
+ausführbar zu machen. \\
+{\bf Alternative:}rqt C++ Code
+%http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29
+
+Die Nodes mit dem Befehl 
+
+ \begin{lstlisting}
+ rosrun beginner_tutorials Dateiname.py
+ \end{lstlisting}
+ 
+starten.
+Im Shell Fenster des Listener Nodes sollte nun die Ausgabe des Talker Nodes erscheinen.
+
+%Bild einfügen
+Falls dies nicht passiert, sollte die obige Anleitung noch einmal genau befolgt werden und zusätzlich das Netzwerk auf Fehler überprüft werden.
+%http://wiki.ros.org/ROS/NetworkSetup
+
+%TODO Auf dem Raspberry nicht möglich?=???!!!
+Die Nodes und Topics können zum besseren Verständnis visualisiert werden.
+Zuerst muss das rqt package installiert werden.
+
+ \begin{lstlisting}
+ sudo get-apt install ros-groovy-rqt
+ \end{lstlisting}
+
+Mit 
+
+ \begin{lstlisting}
+ rqt_graph 
+ \end{lstlisting}
+
+wird das Verhältnis der Nodes visualisiert.
+
+%Hierzu schicken wir mithilfe der App eine Message, welche die X und Y %Koordinaten enthält.
+
+%Wir geben in der App die IP des Masters (Pi) an. Das Handy fungiert nun %als ROS Node und versendet (publish) diese Messages über einen Topic, an %welchem der Pi horcht (subscribe).
+
+%Raspberry Pi kann nun mithilfe des ROS Befehls
+
+%	rostopic echo ''Topicbezeichnung''
 	
-aus diesem Topic alle Daten auslesen und ausgeben.
+%aus diesem Topic alle Daten auslesen und ausgeben.
 %Bilder der Testdaten
-Da die Koordinaten mit denen auf dem Handy übereinstimmen, ist der Netzwerktest erfoglreich.
+%Da die Koordinaten mit denen auf dem Handy übereinstimmen, ist der %Netzwerktest erfoglreich.
 
+%kurze Info zu Services und Massages, hier wird nicht näher darauf eingegangen!!
+%Link zu einem Tutorial bei Interesse
 \subsection{Steuerung des Volksbot}
 
 Für die Ansteuerung des Motorcontrollers des Volksbot benutzen wir ein in einer Projekt-Arbeit entstandenes ROS Package.
