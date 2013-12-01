@@ -336,10 +336,11 @@ Master-Thesis:
 
 \section{Anforderungen}
 
+Mit diesem Projekt haben wir das Ziel, ROS auf dem Pi zu testen und an einem gegebenen Roboter anzuwenden. Aus diesem Ziel, sowie den vorangegangenen Punkten, erschließen sich für uns folgende Anforderungen:
+\vspace{0,4cm}
 \begin{itemize}
 \item Datenpakete über das ROS-Netzwerk verschicken
 \item Beliebige Datentypen verarbeiten
-\item Beliebige Linux-Systeme einbinden
 \item Überprüfung von Log-Dateien, Kontrollausgaben etc..
 \item Robuste und zuverlässige Kommunikation
 \item Modulares und flexibles Netzwerk
@@ -369,47 +370,47 @@ Master-Thesis:
 
 \section{Lösungsvorschläge}
 
-%Datenpakete über das ROS-Netzwerk verschicken
+{\bf Datenpakete über das Netzwerk verschicken:}\\
 Es wird ein ROS-Master aufgesetzt. Dieser gilt als Knotenpunkt (vergleichbar mit einem Defaultgateway) und sorgt für die Kommunikationsmöglichkeit im ROS-Netzwerk.
 
-%Beliebige Datentypen verarbeiten
+{\bf Beliebige Datentypen verarbeiten:}\\
 Die Verarbeitung von verschiedenen Datentypen ist durch msg und srv realisierbar
 %TODO msg/srv näher erklären
 
-%Überprüfung von Log-Dateien, Kontrollausgaben etc
+{\bf Überprüfung Kontrollausgaben:}\\
 Kontrollausgaben und ähnliches werden durch Horchen an Topics mithilfe von echo und durch Ausgabenbereiche im Quellcode durch das Netzwerk realisiert.
  
 %Horchen an Topics mit echo + Ausgabe im Code mithilfe ROS-Stream Fkt.
 
-%Robuste und zuverlässige Kommunikation
+{\bf Zuverlässige Kommunikation:}\\
 Die Netzwerkstabilität und -zuverläsigkeit könnte durch Begrenzung der zeitgleichen Datenübertragung umgesetzt werden. Zusätzlich kann man eine Überprüfung der verschickten und erwarteten Datentypen einbinden.
 
 %Verschickte und erwartete Datentypen müssen stimmen
 %Richtige Konfiguration des Masters und Clients
 
-%Modulares und flexibles Netzwerk, Repositories sollen leicht in Projekte eingebunden werden,  Beliebige Linux-Systeme einbinden
-Ein Modulares und flexibles Netzwerk, sowie das einfache Einbinden von Repositories ist durch ROS in Kombination mit Catkin gegeben. Die Unterstützung beliebiger Linuxsysteme erfolgt ebenfalls durch ROS. Diese Features müssen allerding zuvor aktiviert werden.
+{\bf Flexibles Netzwerk, Repositoryeinbindung:}\\
+Ein Modulares und flexibles Netzwerk, sowie das einfache Einbinden von Repositories ist durch ROS in Kombination mit Catkin gegeben. Diese Features müssen allerding zuvor aktiviert werden.
 %TODO umschreiben!
 
 \vspace {0,6cm}
 
 %Roboter soll bei Steuerung in die richtige Richtungen fahren
+{\bf Steuerung eines Roboters:}\\
 Die Reaktionszeit und Steuerung wird durch zuverlässige und leistungstarke Hardware, sowie durch einen effizient geschriebenen Code bestimmt. In diesem Fall können wir die Hardware (mit ausßnahme des Pi) aufrüsten. Der Code lässt sich gar nicht oder nur mühsam verändern und austauschen.
 %abhängig vom richtigen Code der Motorsteuerung
 
 %abhängig von Raspberry Pi Hardware und effizientem Code und
 %guter Hardware
-
+{\bf ROS-Core automatisch starte:}\\
 Um bequem mit dem Raspberry arbeiten zu können, ohne jedes mal den ROS-Core starten zu müssen, muss dieser in den Bootvorgang des Raspbian eingebunden werden.
 
-%sollte in Linux beim booten konfiguriert werden
-
+{\bf Leichte Bedienbarkeit:}\\
+Diesen Punkt wollen wir mit einer Smartphone App realisieren. Der Roboter soll dabei auf das Schwenken des Smartphons reagieren und seine Geschwindigkeit/Richtung entsprechend anpassen.
 %gegeben durch gute Smartphone App
 
 \vspace{0,6cm}
 
-{\bf optional:}
-
+{\bf Videoübertragung:}\\
 Ein sauberes und störungsfreies Übertragungsbild hängt hauptsächlich von der Hardware des Raspberry Pi, aber auch von der Codierung ab. Der Stream soll durch  Umleiten des Bildes über das Netzwerk an einen PC-Monitor realisiert werden. Falls dabei Probleme auftreten sollten, können wir versuchen die Codierung zu bearbeiten oder leistungsverstärkende Hardware an den Pi anschließen.
 
 %abhängig von Raspberry Pi Hardware und Übertragungs-Codierung
@@ -420,7 +421,7 @@ Ein sauberes und störungsfreies Übertragungsbild hängt hauptsächlich von der
 
 \section{Bewertung der Lösungen}
 
-Bis jetzt sind unsere Lösungsansätze realativ erfolgreich gewesen. Es könnten jedoch Probleme bei der Steuerung des Roboters über das WLAN-Netzwerk entstehen. Der Grund dafür ist die zusätzliche Datenmenge, die verarbeitet werden muss. 
+Bis jetzt sind unsere Lösungsansätze realativ erfolgreich gewesen. Es könnten jedoch Probleme bei der Steuerung des Roboters über das WLAN-Netzwerk entstehen. Der Grund dafür ist die zusätzliche Datenmenge, die verarbeitet werden muss.
 
 \section{Implementation}
 
@@ -643,7 +644,7 @@ Der Raspberry wird mithilfe eines USB zu VGA Adapters an den Volksbot angeschlos
 \section{Fazit}
 \subsection{Zusammenfassung}
 
-Das Projekt ist durch die hohen Anforderungen und den knappen Zeitraum sehr Zeitintensiv. Allerdings war es auch sehr interessant. Wir haben viel über Linux und ROS gelernt und uns mit Hardware- und Netzwerkkonfiguration außeinander gesetz1 Seitet.
+Sehr gut ist der Askept, dass man das Thema frei wählen konnte. Dadurch steigt das Interesse und die Motivation an der Arbeit. Durch die hohen Anforderungen und den knappen Zeitraum ist es aber auch sehr Anspruchsvoll und Arbeitsintensiv. 
 
 %hohe Anforderungen für knappen Zeitraum
 %interessantes, anspruchsvolles Projekt
@@ -664,7 +665,7 @@ Zum Beispiel kann man nicht nur Roboter, sondern durch das GPIO-Interface auch v
 
 \subsection{Eigene Leistung}
 
-Durch unser Projekt wird der Laptop am ''Volksbot'' durch einen viel kleineren und leichteren Raspberry Pi ersetzt. Außerdem eröffnet sich uns die Möglichkeit, den Pi als Hardware-Node zu benutzen.
+Durch unser Projekt wird der Laptop am ''Volksbot'' durch einen viel kleineren und leichteren Raspberry Pi ersetzt. Außerdem eröffnet sich uns die Möglichkeit, den Pi als Hardware-Node zu benutzen oder anderweitig einzusetzten.
 
 \section{Quellen}
 \begin{verbatim}
