@@ -171,7 +171,7 @@ auf die Ablösung eines Laptops durch den kleineren und leichteren Raspberry Pi 
 \subsection{Aufbau der Arbeit}
 
 In den Grundlagen werden alle wichtigen Komponenten und Aspekte genauer erklärt. Anschließend wird das Grundproblem, welches wir lösen wollen erläutert und verwandte Arbeiten aufgelistet. 
-Darauf Folgend werden die dadurch entstandenen Anforderungen und Lösungsvorschläge, sowie die Implementation beschrieben.
+Darauf folgend werden die dadurch entstandenen Anforderungen und Lösungsvorschläge, sowie die Implementation beschrieben.
 
 \section{Grundlagen}
 %6-8 Seiten
@@ -181,11 +181,11 @@ Darauf Folgend werden die dadurch entstandenen Anforderungen und Lösungsvorschl
 Der Raspberry Pi ist ein kreditkartengroßer Einplatinencomputer, der von der Raspberry Pi Foundation entwickelt wurde.
 Wir benutzen für dieses Projekt das leistungsstärkere Modell B.
 %Zitate für die techn. Details?
-\parbox{8cm}{
+\parbox{7,8cm}{
 Technische Details:
 \begin{itemize}
 \item Preis: ca. 35 Euro
-\item Prozessor: ARM1176JZF-S (700 MHz)
+\item Prozessor: ARM1176JZF-S(700 MHz)
 \item Broadcom VideoCore IV
 \item SDRAM: 512 MB
 \item Bis zu 16 GPIO-Pins
@@ -193,9 +193,9 @@ Technische Details:
 \item FBAS, HDMI
 \end{itemize}
 }
-\hfill
+%\hfill
 \parbox{5cm}{
-\includegraphics[width=5cm]{Raspi.jpg}
+\includegraphics[width=9cm]{Raspi.jpg}
 }
 \begin{itemize}
 \item 3,5-mm-Klinkenstecker (analog), HDMI (digital)
@@ -292,13 +292,16 @@ Es ist in 4 Spaces unterteilt:
 Catkin bietet uns eine komfortable Möglichkeit über cmake, ROS Packages zu compilieren, Tests an Ihnen durchzuführen und sie schließlich zu installieren.
 
 \subsection{Volksbot}
-
+\parbox{8cm}{
 VolksBot ist ein Roboterbaukastensystem.
 Mit Hilfe des Baukastens können sehr schnell und preiswert unterschiedlichste Varianten mobiler Roboter hergestellt werden.
 Der Volksbot wurde an der Hochschule Weingarten für den RoboCup verwendet.
-%Wir brauchen hier mehr Infos, wo wurde er verwendet, Besonderheiten
-%Bild
-
+}\hfill
+\parbox{5cm}{
+\includegraphics[width=5cm]{Volksbot.jpg}
+%TODO Wir brauchen hier mehr Infos, wo wurde er verwendet, Besonderheiten<-- evtl nicht soo wichtig
+%TODO Bild
+}
 \subsection{Smartphone}
 
 Es wird ein auf Android basierendes Smartphone verwendet.
@@ -322,7 +325,7 @@ Dadurch ergeben sich neue Vorteile.
 
 In unserem Fall wird der Roboter Volksbot mit einem für diesen Zweck überdimensionierten Laptop gesteuert. Wir wollen dieses Problem beheben und uns die obigen Vorteile verschaffen, indem wir ROS auf einem Raspberry Pi laufen lassen.
 
-\subsection{Verwandte Arbeiten}
+\section{Verwandte Arbeiten}
 
 Master-Thesis:
 \begin{enumerate}
@@ -341,21 +344,23 @@ Master-Thesis:
 \item Robuste und zuverlässige Kommunikation
 \item Modulares und flexibles Netzwerk
 \item Repositories sollen leicht in Projekte eingebunden werden
-\end{itemize}
 
-{\bf optional}
+\vspace{0,6cm}
 
-\begin{itemize}
-\item Roboter soll bei Steuerung in richtige Richtungen fahren
-\item Roboter soll sofort auf Richtungsanweisungen reagieren
+\item Roboter soll bei Steuerung in die richtige Richtungen fahren
+\item Roboter soll sofort auf Anweisungen reagieren
 \item Sensibilität der Steuerung sollte einstellbar sein
 \item Steuerung über WLAN
-\item Raspberry Pi auf Roboter ohne Kabelgewirr %haben wir mit WLAN nicht
 \item ROS-Core des Raspberry beim Hochfahren automatisch starte
 \item Leichte Bedienbarkeit des Roboters
 
 \vspace{0,6cm}
 
+\end{itemize}
+
+{\bf optional}
+
+\begin{itemize}
 \item Streaming-Bild ruckelfrei verarbeiten
 \item unkonvertiert Echtzeitübertragung
 \item Ausgabe am externem Bildschirm
@@ -364,32 +369,32 @@ Master-Thesis:
 
 \section{Lösungsvorschläge}
 
-
+%Datenpakete über das ROS-Netzwerk verschicken
 Es wird ein ROS-Master aufgesetzt. Dieser gilt als Knotenpunkt (vergleichbar mit einem Defaultgateway) und sorgt für die Kommunikationsmöglichkeit im ROS-Netzwerk.
 
+%Beliebige Datentypen verarbeiten
 Die Verarbeitung von verschiedenen Datentypen ist durch msg und srv realisierbar
 %TODO msg/srv näher erklären
 
+%Überprüfung von Log-Dateien, Kontrollausgaben etc
 Kontrollausgaben und ähnliches werden durch Horchen an Topics mithilfe von echo und durch Ausgabenbereiche im Quellcode durch das Netzwerk realisiert.
  
 %Horchen an Topics mit echo + Ausgabe im Code mithilfe ROS-Stream Fkt.
 
+%Robuste und zuverlässige Kommunikation
 Die Netzwerkstabilität und -zuverläsigkeit könnte durch Begrenzung der zeitgleichen Datenübertragung umgesetzt werden. Zusätzlich kann man eine Überprüfung der verschickten und erwarteten Datentypen einbinden.
 
 %Verschickte und erwartete Datentypen müssen stimmen
 %Richtige Konfiguration des Masters und Clients
 
-Ein Modulares und flexibles Netzwerk, sowie das einfache Einbinden von Repositories ist durch ROS in Kombination mit Catkin gegeben. Die Unterstützung beliebiger Linuxsysteme erfolgt ebenfalls durch ROS. Diese Features müssen allerding zuvor eingebunden werden.
+%Modulares und flexibles Netzwerk, Repositories sollen leicht in Projekte eingebunden werden,  Beliebige Linux-Systeme einbinden
+Ein Modulares und flexibles Netzwerk, sowie das einfache Einbinden von Repositories ist durch ROS in Kombination mit Catkin gegeben. Die Unterstützung beliebiger Linuxsysteme erfolgt ebenfalls durch ROS. Diese Features müssen allerding zuvor aktiviert werden.
 %TODO umschreiben!
 
-%durch ROS und catkin gegeben 
-%durch catkin gegeben
+\vspace {0,6cm}
 
-{\bf optional:}
-
-Die Reaktionszeit 
-und Steuerung %hinzugefügt, weil oberer abschnitt auskommentiert
-wird durch zuverlässige und leistungstarke Hardware, sowie durch einen effizient geschriebenen Code bestimmt. In diesem Fall können wir die Hardware (mit ausßnahme des Pi) aufrüsten. Der Code lässt sich gar nicht oder nur mühsam verändern und austauschen.
+%Roboter soll bei Steuerung in die richtige Richtungen fahren
+Die Reaktionszeit und Steuerung wird durch zuverlässige und leistungstarke Hardware, sowie durch einen effizient geschriebenen Code bestimmt. In diesem Fall können wir die Hardware (mit ausßnahme des Pi) aufrüsten. Der Code lässt sich gar nicht oder nur mühsam verändern und austauschen.
 %abhängig vom richtigen Code der Motorsteuerung
 
 %abhängig von Raspberry Pi Hardware und effizientem Code und
@@ -401,7 +406,9 @@ Um bequem mit dem Raspberry arbeiten zu können, ohne jedes mal den ROS-Core sta
 
 %gegeben durch gute Smartphone App
 
-vspace{0,6cm}
+\vspace{0,6cm}
+
+{\bf optional:}
 
 Ein sauberes und störungsfreies Übertragungsbild hängt hauptsächlich von der Hardware des Raspberry Pi, aber auch von der Codierung ab. Der Stream soll durch  Umleiten des Bildes über das Netzwerk an einen PC-Monitor realisiert werden. Falls dabei Probleme auftreten sollten, können wir versuchen die Codierung zu bearbeiten oder leistungsverstärkende Hardware an den Pi anschließen.
 
@@ -581,6 +588,8 @@ Mit
  \end{lstlisting}
 
 wird das Verhältnis der Nodes visualisiert.
+
+%TODO evtl bild einfügen?
 
 %Hierzu schicken wir mithilfe der App eine Message, welche die X und Y %Koordinaten enthält.
 
