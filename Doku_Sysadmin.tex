@@ -3,11 +3,12 @@
  \usepackage[utf8]{inputenc}
  \usepackage{listings}
   \usepackage{color}
+  \usepackage{hyperref}
  \usepackage{graphicx}
  \author{Denis Herdt, Almin Causevic}
  \title{ROS auf dem Rapberry Pi}
- \setlength{\parindent}{0pt}                   % Einrueckung 1. Zeile eines Absatzes
- \setlength{\parskip}{5pt plus 2pt minus 1pt}  % Abstand zwischen Absaetzen
+ \setlength{\parindent}{0pt}
+ \setlength{\parskip}{5pt plus 2pt minus 1pt}
  \frenchspacing
  \sloppy
   \lstset{
@@ -22,7 +23,7 @@
    showstringspaces=false,
    flexiblecolumns=false,
    tabsize=2,
-   frame=tBlR
+   frame=tblr
    numbers=left,
    numberstyle=\tiny,
    numberblanklines=false,
@@ -33,7 +34,7 @@
  
  
 \begin{document}
-%4-20 Seiten
+
 \begin{figure}[h]
 
 \includegraphics[width=4cm]{hs-logo.jpg}
@@ -62,7 +63,7 @@ von Denis Herdt und Almin Causevic
 \pagebreak
 
 \section{Einleitung}
-%1-2 Seiten
+
 \subsection{Motivation}
 
 Die Entscheidung für dieses Thema fiel dadurch, dass es zukünftig genutzt werden kann und Soft-/Hardware kombiniert werden.
@@ -174,7 +175,7 @@ In den Grundlagen werden alle wichtigen Komponenten und Aspekte genauer erklärt
 Darauf folgend werden die dadurch entstandenen Anforderungen und Lösungsvorschläge, sowie die Implementation beschrieben.
 
 \section{Grundlagen}
-%6-8 Seiten
+
 
 \subsection{Raspberry Pi Hardwarekomponenten}
 
@@ -192,7 +193,7 @@ Technische Details:
 \item USB-Anschlüsse: 2
 \item FBAS, HDMI
 \end{itemize}
-}
+}\cite{Amazon}
 %\hfill
 \parbox{5cm}{
 \includegraphics[width=9cm]{Raspi.jpg}
@@ -254,14 +255,14 @@ Den Entwicklern von ROS ging es vor allem um die Vereinfachung, Software für ei
 %Zitat
 ROS stellt dazu Bibliotheken und Werkzeuge, Hardware Abstraktion, Gerätetreiber, Bibliotheken, Visualisierungen, Nachrichtenvermittlung, Packetverwaltung und andere Komponenten zur Verfügung.
 
-Im Nachfolgenden werden die wichtigsten ROS Core Komponenten kurz beschrieben.
+Im Nachfolgenden werden die für dieses Projekt wichtigsten ROS Core Komponenten kurz beschrieben.
 
 {\bf Topic} Topics können als "named bus" gesehen werden, über welche Nodes Messages verteilen können. Es ähnelt dem Multicasting Prinzip. An Topics kann subscribed (zugehört) oder published (geredet) werden.
 
 {\bf Node} Eine Node ist ein simples Programm, welches jede Funktionalität ermöglicht.  Sie kommunizieren direkt über oben genannte Topics.
 
 {\bf Roscore} Der Roscore kann als Rückgrat des ROS Systems beschrieben werden. Es verwaltet die Registrierung der Nodes und Funktionen in einer Art lookup service für andere Nodes. Es bietet zusätzlich einen Parameter Server, in welchem im Laufenden Betrieb Variablen und Paramater gespeichert werden können und mit welchen gearbeitet werden kann.
-
+%%%
 {\bf Message} Eine Message kann als Sprache angesehen werden, in welcher Nodes kommunizieren. Es ist eine Struktur aus simplen Parametern.
 Beispiel:
 \begin{verbatim}
@@ -271,15 +272,15 @@ Beispiel:
 	float64 z
 \end{verbatim}
 Eigene Messages mit den uns bekannten Standardtypen wie int, bool, etc können leicht definiert werden.
-
+%%%
 {\bf Package} Software in ROS wird mithilfe von Packages verwaltet.
 Sie enthalten Nodes, datasets, configuration files, etc.
-
+%%%
 {\bf Manifest} Sie enthält Meta Informationen über ein ROS Package, wie beispielsweise Abhängigkeiten oder Lizenzinformationen.
-
+%%%
 {\bf Launchfile} Ein Launchfile ist eine simple XML Datei, welche Informationen über die zu Beginn zu startenden Nodes mit entsprechenden Parametern enthält.
 Dies bietet eine komfortablere Alternative, als jedes Node einzeln zu starten.
-%Beispiel??
+Ein Beispiel für ein Launchfile ist in der Implementation bei der Steuerung eines Roboters (Volksbot) gegeben.
  
 {\bf catkin} Catkin ist das seit Groovy in ROS verwendete Workspace-Verwaltungssystem.
 Es ist in 4 Spaces unterteilt:
@@ -436,7 +437,8 @@ Hierzu gibt es 2 mögliche Vorgehensweisen:
 
 Wir haben uns für die 2. Methode entschieden, da NOOBS 6 verschiedene Images anbietet, doch wird in diesem Fall nur Raspbian benötigt.
 Zudem erfordert die 2. Vorgehensweise mehr Arbeit mit dem Linux Betriebssystem, was in dieser Vorlesung nur vorteilhaft sein kann.
-Die genauen Installationsschritte entnehmen Sie bitte der Quelle (raspbian...) unter dem Unterpunkt Using the Linux command line. \\
+Die genauen Installationsschritte entnehmen Sie bitte dem Unterpunkt Using the Linux command line. \cite{SDCard}
+\\
 Um mögliche Fehlerquellen schon beim Herunterladen der Image Datei zu vermeiden, wird empfohlen, wie in der Anleitung beschrieben die sha1sum zu vergleichen.
 %\begin{enumerate}
 %\item Mit df -h herausfinden, welchen Namen die SD-Karte trägt (z. B. sdb)
@@ -456,8 +458,8 @@ Es gibt 2 sinnvolle Wege, ROS Groovy auf dem Raspbian System aufzusetzen.
 \item binary packages für die ARM-Architektur installieren
 \end{enumerate}
 
-Da die Installation und das Kompilieren von Source zwar sehr lehrreich, doch auch relativ zeitaufwendig ist, benutzen wir die vorhandenen binary packages für ARM. 
-Hierzu einfach nach dieser Anleitung vorgehen (Quelle..) \\
+Da die Installation und das Kompilieren von Source zwar lehrreich, doch auch relativ zeitaufwendig ist, benutzen wir die vorhandenen binary packages für ARM.
+Hierfür nach Punkt 2 der Anleitung vorgehen \cite{RosInstall} \\
 Leider werden dadurch nur die grundlegendsten Packages von ROS unterstützt.
 Da ein großer Vorteil von ROS die Modularität ist, können leicht benötigte packages über catkin nachinstalliert werden.
 Dazu weiter unten die Vorgehensweise erklärt am Beispiel des packages zur Steuerung des Roboters.\\
@@ -478,7 +480,7 @@ Der Source Befehl bewirkt, dass die Pfade zu den ROS Verzeichnissen dem Linux Sy
 %Shell Bilder, Bsp. von Kommandos
 %TODO in .bashrc eintragen!!
 
-Es empfiehlt sich, sich mit den typischen ROS Befehlen etwas vertraut zu machen. (Quelle... Tutorials) \\
+Es empfiehlt sich, sich mit den typischen ROS Befehlen etwas vertraut zu machen. \cite{RosTuts} \\
 Mit diesen Einstellungen sollte es kein Problem mehr sein, ein Netzwerk zwischen Systemen aufzusetzen.
 \subsection{Netzwerk aufsetzen}
 %Vorrausetzungen für das ROS Netzwerk
@@ -491,9 +493,7 @@ Die IP lässt sich leicht aus den Informationen herauslesen.
 
 {\bf ROS Workspace anlegen:}
 
-Für ROS sollte noch ein Workspace mit catkin erzeugt werden.
-Quelle: http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment
-4. Create a ROS Workspace
+Für ROS sollte noch ein Workspace mit catkin erzeugt werden. \cite{Workspace}
 Auch das Sourcen des Workspace sollte am besten in die .bashrc, wie oben gezeigt, aufgenommen werden. \\
 Es noch zusätzlich ein Beispiel package erzeugt, welches später zum Testen des Netzwerks erforderlich ist.
 Dazu in das Source Verzeichnis des catkin Workspace wechseln
@@ -547,9 +547,8 @@ Falls bei Eingabe des Befehls
 
 als Antwort mindestens ein Node (/rosout) erscheint, läuft der Kern ordnungsgemäß. \\
 Um nun einfache Testausgaben zwischen Systemen zu schicken, werden zwei ROS Nodes und ein Topic zur Kommunikation eingerichtet.
-Auf dem ROS Master wird ein listener Node (Subscriber) gestartet, der Quellcode befindet sich unter 1.1.1 The Code. \\
-Auf einem anderen ROS System wird ein talker Node (Publisher) gestartet, der Quellcode befindet sich unter 1.2.1 The Code. \\
-%http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29
+Auf dem ROS Master wird ein listener Node (Subscriber) gestartet.
+Auf einem anderen ROS System wird ein talker Node (Publisher) gestartet, \\ Der Quellcode kann hier heruntergeladen werden \cite{PythonCode}  \\
 Es kann auch der talker anstatt des listeners auf dem Master ausgeführt werden.
 Es sollte nicht vergessen werden, die Quelldateien mittels
 
@@ -558,9 +557,8 @@ Es sollte nicht vergessen werden, die Quelldateien mittels
  \end{lstlisting}
 
 ausführbar zu machen. \\
-{\bf Alternative:}rqt C++ Code
-%http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29
-
+{\bf Alternative:} C++ Code \cite{C++Code} \\
+\\
 Die Nodes mit dem Befehl 
 
  \begin{lstlisting}
@@ -572,7 +570,7 @@ Im Shell Fenster des Listener Nodes sollte nun die Ausgabe des Talker Nodes ersc
 
 %Bild einfügen
 Falls dies nicht passiert, sollte die obige Anleitung noch einmal genau befolgt werden und zusätzlich das Netzwerk auf Fehler überprüft werden.
-%http://wiki.ros.org/ROS/NetworkSetup
+\cite{NetworkSetup}
 
 %TODO Auf dem Raspberry nicht möglich?=???!!!
 Die Nodes und Topics können zum besseren Verständnis visualisiert werden.
@@ -608,14 +606,22 @@ wird das Verhältnis der Nodes visualisiert.
 %Link zu einem Tutorial bei Interesse
 \subsection{Steuerung des Volksbot}
 
-Für die Ansteuerung des Motorcontrollers des Volksbot benutzen wir ein in einer Projekt-Arbeit entstandenes ROS Package.
-<<<<<<< HEAD
-Nach einiger Konfiguration konnten wir dieses Package mithilfe catkin!make kompilieren und in unser Projekt integrieren.
-Über eine roslaunch Datei wurden die nötigen Nodes und Topics des Packages gestartet.
+Da der Roboter frei mit dem Smartphone gesteuert werden soll und sich der Raspberry losgelöst auf dem Volksbot befinden soll, werden hierfür Akkus für die Stromversprgung und ein Wlan-Stick für die Datenübertragung benutzt. \\
+Für die Ansteuerung des Motorcontrollers des Volksbot benutzen wir ein in einer Projekt Arbeit entstandenes ROS package. \cite{Motorsteuerung}
+Nach Befolgen der Installationsanleitung (weicht etwas von der Standard catkin Installation ab) kann das package kompiliert werden.
+Anschließend können über eine roslaunch Datei die nötigen Nodes und Topics des Packages gestartet werden.
 
+ \begin{lstlisting}
+ roslaunch tmc200ctrl_examples tmc200controller.launch
+ \end{lstlisting}
+ 
+Wobei $tmc200ctrl_examples$ das Verzeichnis darstellt und \\ $tmc200controller.launch$ das Launch File ist.
 Die Netzwerk-Funktionalität ist nach den obigen Tests gegeben.
-Die Rohdaten des Smartphone-Sensors werden durch das ROS Steuerungspaket entsprechend verändert und über den Raspberry an den Volksbot gesendet.
-Der Raspberry wird mithilfe eines USB zu VGA Adapters an den Volksbot angeschlossen. Dieser wird per USB an den Raspberry Pi und per VGA an das Steuerungsmodul des Roboters angeschlossen.
+Ein Smartphone verbindet sich über eine ROS App \cite{TeleopApp} mit dem Master.
+Es sendet nun je nach Neigungswinkel des Smartphones entsprechend Koordinaten Daten.
+Diese Daten werden durch das ROS package entsprechend verändert, sodass Sie als Geschwindigkeiten für den Volksbot verwendet werden können.
+Sie werden an den Motor des Volksbot gesendet.
+Der Raspberry wird mithilfe eines USB zu VGA Adapters an den Volksbot angeschlossen. Dieser wird per USB an den Raspberry Pi und per VGA an eine serielle Schnittstelle des Motors angeschlossen.
 
 
 %TODO Konfiguration Motorsteuerung-Paket und Compilieren
@@ -644,7 +650,7 @@ Der Raspberry wird mithilfe eines USB zu VGA Adapters an den Volksbot angeschlos
 \section{Fazit}
 \subsection{Zusammenfassung}
 
-Sehr gut ist der Askept, dass man das Thema frei wählen konnte. Dadurch steigt das Interesse und die Motivation an der Arbeit. Durch die hohen Anforderungen und den knappen Zeitraum ist es aber auch sehr Anspruchsvoll und Arbeitsintensiv. 
+Sehr gut ist der Aspekt, dass man das Thema frei wählen konnte. Dadurch steigt das Interesse und die Motivation an der Arbeit. Durch die hohen Anforderungen und den knappen Zeitraum ist es aber auch sehr anspruchsvoll und arbeitsintensiv. 
 
 %hohe Anforderungen für knappen Zeitraum
 %interessantes, anspruchsvolles Projekt
@@ -667,18 +673,7 @@ Zum Beispiel kann man nicht nur Roboter, sondern durch das GPIO-Interface auch v
 
 Durch unser Projekt wird der Laptop am ''Volksbot'' durch einen viel kleineren und leichteren Raspberry Pi ersetzt. Außerdem eröffnet sich uns die Möglichkeit, den Pi als Hardware-Node zu benutzen oder anderweitig einzusetzten.
 
-\section{Quellen}
-\begin{verbatim}
 
-http://de.wikipedia.org/wiki/Raspberry_Pi
-http://www.amazon.de/Raspberry-Pi-RBCA000-Mainboard-1176JZF-S/dp/B008PT4GGC
-http://www.raspbian.org/
-http://www.softwareok.de/?seite=faq-System-Allgemein&faq=13
-http://de.wikipedia.org/wiki/ARM-Architektur
-http://www.rn-wissen.de/index.php/Raspberry_PI:_GPIO
-http://www.raspberrypi.org/faqs <- bild Rasp
-http://www.euron.org/maps/germany <- bild Volksbot
-
-\end{verbatim}
-%TODO überall quellen angeben
+\bibliography{Doku_Sysadmin.bib}
+\bibliographystyle{plain}
 \end{document}
