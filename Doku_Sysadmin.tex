@@ -139,7 +139,7 @@ Da uns am Ende noch genügend Zeit zur Verfügung stand, haben wir folgende Punk
 \item Optimierung der WLAN-Verbindung am Raspberry
  
 \end{itemize}
-Bleibt am Ende noch genug Zeit, wird die integriete Kamera des Roboters angesprochen und das Bilde mithilfe des Netzwerkes auf einen externen Bildschirm übertragen.
+Bleibt am Ende noch genug Zeit, wird die integriete Kamera des Roboters angesprochen und das Bild mithilfe des Netzwerkes auf einen externen Bildschirm übertragen.
 
 %Zunächst möchten wir ein passendes, auf Linux basierendes Betriebssystem auswählen und auf dem Raspberry Pi aufsetzen. In diesem Fall haben wir uns für Raspbian entschieden, da es zusätzlich am kopatibelsten zu ROS ist.
 
@@ -183,7 +183,7 @@ Der Raspberry Pi ist ein kreditkartengroßer Einplatinencomputer, der von der Ra
 Wir benutzen für dieses Projekt das leistungsstärkere Modell B.
 %Zitate für die techn. Details?
 \parbox{7,8cm}{
-Technische Details:
+Technische Details: \cite{Amazon}
 \begin{itemize}
 \item Preis: ca. 35 Euro
 \item Prozessor: ARM1176JZF-S(700 MHz)
@@ -193,7 +193,7 @@ Technische Details:
 \item USB-Anschlüsse: 2
 \item FBAS, HDMI
 \end{itemize}
-}\cite{Amazon}
+}
 %\hfill
 \parbox{5cm}{
 \includegraphics[width=9cm]{Raspi.jpg}
@@ -263,20 +263,20 @@ Im Nachfolgenden werden die für dieses Projekt wichtigsten ROS Core Komponenten
 
 {\bf Roscore} Der Roscore kann als Rückgrat des ROS Systems beschrieben werden. Es verwaltet die Registrierung der Nodes und Funktionen in einer Art lookup service für andere Nodes. Es bietet zusätzlich einen Parameter Server, in welchem im Laufenden Betrieb Variablen und Paramater gespeichert werden können und mit welchen gearbeitet werden kann.
 %%%
-{\bf Message} Eine Message kann als Sprache angesehen werden, in welcher Nodes kommunizieren. Es ist eine Struktur aus simplen Parametern.
-Beispiel:
-\begin{verbatim}
-	# This represents a vector in free space. 
-	float64 x
-	float64 y
-	float64 z
-\end{verbatim}
-Eigene Messages mit den uns bekannten Standardtypen wie int, bool, etc können leicht definiert werden.
+%{\bf Message} Eine Message kann als Sprache angesehen werden, in welcher Nodes kommunizieren. Es ist eine Struktur aus simplen Parametern.
+%Beispiel:
+%\begin{verbatim}
+%	# This represents a vector in free space. 
+%	float64 x
+%	float64 y
+%	float64 z
+%\end{verbatim}
+%Eigene Messages mit den uns bekannten Standardtypen wie int, bool, etc können leicht definiert werden.
 %%%
 {\bf Package} Software in ROS wird mithilfe von Packages verwaltet.
 Sie enthalten Nodes, datasets, configuration files, etc.
 %%%
-{\bf Manifest} Sie enthält Meta Informationen über ein ROS Package, wie beispielsweise Abhängigkeiten oder Lizenzinformationen.
+%{\bf Manifest} Sie enthält Meta Informationen über ein ROS Package, wie beispielsweise Abhängigkeiten oder Lizenzinformationen.
 %%%
 {\bf Launchfile} Ein Launchfile ist eine simple XML Datei, welche Informationen über die zu Beginn zu startenden Nodes mit entsprechenden Parametern enthält.
 Dies bietet eine komfortablere Alternative, als jedes Node einzeln zu starten.
@@ -300,8 +300,6 @@ Der Volksbot wurde an der Hochschule Weingarten für den RoboCup verwendet.
 }\hfill
 \parbox{5cm}{
 \includegraphics[width=5cm]{Volksbot.jpg}
-%TODO Wir brauchen hier mehr Infos, wo wurde er verwendet, Besonderheiten<-- evtl nicht soo wichtig
-%TODO Bild
 }
 \subsection{Smartphone}
 
