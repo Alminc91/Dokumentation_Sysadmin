@@ -1,0 +1,14 @@
+\par \includegraphics[width=2cm]{pics/hs-logo.jpg}
+%\end{figure}
+
+
+\vspace{1cm}
+
+\begin{center}
+
+{\bf \huge ROS auf dem Raspberry Pi}
+\vspace{2cm}
+
+\today
+
+\end{center}
